@@ -1,0 +1,6639 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TypeSafe System One API 문서의 비공식 한국어 번역">
+      
+      
+      
+        <link rel="canonical" href="https://ryankwondev.github.io/typesafe-docs-ko/cookbooks/rerank_typesafe/">
+      
+      
+        <link rel="prev" href="../feeder_watch/">
+      
+      
+        <link rel="next" href="../infinite_cardinality_choice/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Re-ranking - TypeSafe 문서 (비공식 한국어 번역)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    <meta name="robots" content="noindex, nofollow">
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#re-ranking" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="TypeSafe 문서 (비공식 한국어 번역)" class="md-header__button md-logo" aria-label="TypeSafe 문서 (비공식 한국어 번역)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TypeSafe 문서 (비공식 한국어 번역)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Re-ranking
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TypeSafe 문서 (비공식 한국어 번역)" class="md-nav__button md-logo" aria-label="TypeSafe 문서 (비공식 한국어 번역)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TypeSafe 문서 (비공식 한국어 번역)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작하기
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    시작하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    빠른 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/coding-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    코딩 에이전트와 Jev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/machine-learning-primer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 입문
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개념
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    개념
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/use-case-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    사용 사례
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/system-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System One
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/how-to-build-with-system-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TypeSafe로 구축하는 방법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primitives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primitives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primitive(질문)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/choice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Choice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/score/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Score
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/noul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/box/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Box
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced: structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    이미지
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../confidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Confidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    패턴
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    패턴
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    패턴
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/fan-out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Speculative fan-out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/noul-screen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noul로 먼저 선별하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/companion-noul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Companion Noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/confidence-routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Confidence 기반 routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/probability-routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    확률 기반 routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/composite-scoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Composite scoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookbooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cookbooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../function_calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skill_suggestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skill 추천
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../llm_guardrails/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM을 위한 Guardrail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../citation_check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    인용 재확인
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verify_llm_outputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM의 답을 출처에 비추어 검증하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classifying_rag_passages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG passage 분류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic_memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    간단한 메모리 시스템
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hierarchical_classification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    계층적 분류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classification_using_confidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    confidence를 활용한 분류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../twitch_chat_filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Twitch 채팅 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sde_cascade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDE cascade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../date_extraction_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    날짜 추출
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pre_parsed_value_extraction_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    미리 파싱한 값 추출
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoformat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    구조 복원
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cart_from_primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    장바구니
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reading_scanned_documents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스캔한 예방접종 기록 읽기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ocr_confidence_bounding_boxes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OCR confidence와 bounding box
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feeder_watch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    새 모이통 카메라 방문 기록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Re-ranking
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Re-ranking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        직접 해 보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        수천 개 중에서 문서 하나를 어떻게 찾을까요?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fast-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fast search란 무엇인가요?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#re-ranking_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re-ranking이란 무엇인가요?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jev-re-ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jev로 re-ranking하기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jev로 re-ranking하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jev가 돌려주는 값
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#re-ranking_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re-ranking 예제
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="re-ranking 예제">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        준비
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fast-search-passage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fast search로 passage 순위 매기기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fast-search-passage-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fast search가 정답 passage를 1위에 놓는 일은 드뭅니다
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jev-shortlist-re-ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jev로 shortlist re-ranking하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-ranking_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re-ranking은 정답을 위쪽으로 끌어올립니다
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        다음 단계
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../infinite_cardinality_choice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    무한 cardinality Choice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../semantic_find/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    줄 단위 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entity_alignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge graph의 entity alignment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intelliprompter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intelliprompter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../consistency_choice_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-consistency: Choice 질문
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../consistency_noul_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-consistency(자기 일관성): noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parallel_questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parallel questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoresearch_feature_discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autoresearch feature 탐색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    데모
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    데모
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jev로 만든 프로젝트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/airbnb-listing-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google Sheets에서 Airbnb 숙소 검색하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/smart-home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스마트 홈 어시스턴트 데모
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/content-audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jev로 하는 콘텐츠 감사
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모델
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agent-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent skill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    법적 고지
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model-jaggedness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model jaggedness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모델 변경 이력
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/system-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System One
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/list-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모델 목록 조회
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    요청 규칙과 오류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SDK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    클라이언트 SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2" id="__nav_15_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TypeSafe Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_2" id="__nav_15_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    사용법
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    사용법
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/usage/basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기본 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/usage/advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    고급 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    변경 이력
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_4" id="__nav_15_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API 레퍼런스
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_4_2" id="__nav_15_2_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clients
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clients
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/clients/async/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    비동기 클라이언트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/clients/sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    동기 클라이언트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_4_3" id="__nav_15_2_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Types
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    질문
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/responses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    답변과 응답
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공통 타입
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/retries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    예외
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/constants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    상수
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3" id="__nav_15_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JavaScript
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    JavaScript
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JavaScript SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    변경 이력
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3" id="__nav_15_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API 레퍼런스
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_2" id="__nav_15_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIConnectionError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIConnectionError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIPromise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIPromise&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APITimeoutError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APITimeoutError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIUserAbortError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIUserAbortError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/AuthenticationError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: AuthenticationError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/BadRequestError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: BadRequestError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/Image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: Image
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/InternalServerError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: InternalServerError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/NotFoundError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: NotFoundError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/PermissionDeniedError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: PermissionDeniedError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/RateLimitError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: RateLimitError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/TypeSafeClient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: TypeSafeClient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/TypeSafeError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: TypeSafeError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/UnprocessableEntityError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: UnprocessableEntityError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_3" id="__nav_15_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaces
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interfaces
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/BoxCoordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: BoxCoordinates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/BoxQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: BoxQuestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/BoxResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: BoxResponse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ChoiceQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ChoiceQuestion&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ChoiceResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ChoiceResponse&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Logger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ModelCard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ModelCard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/NoulQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: NoulQuestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/NoulResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: NoulResponse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/RequestOptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: RequestOptions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/RetryPolicy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: RetryPolicy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ScoreQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ScoreQuestion&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ScoreResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ScoreResponse&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/SystemOneRequest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: SystemOneRequest&lt;Q&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/SystemOneResult/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: SystemOneResult&lt;Q&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/TextWithAssets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: TextWithAssets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/TypeSafeClientConfig/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: TypeSafeClientConfig
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/WithResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: WithResponse&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_4" id="__nav_15_3_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Aliases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Type Aliases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Asset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Asset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ChoiceCriteria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ChoiceCriteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Compression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Compression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ContentValue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ContentValue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/EntryType/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: EntryType
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/EnvVar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: EnvVar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Fetch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Fetch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/JsonValue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: JsonValue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/LogLevel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: LogLevel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Question/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Question
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ResultFor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ResultFor&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ScoreCriteria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ScoreCriteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ScoreLegend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ScoreLegend&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ScoreOf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ScoreOf&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/SentContent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: SentContent&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_5" id="__nav_15_3_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variables
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Variables
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/ENV/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: ENV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/LOG_LEVELS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: LOG_LEVELS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/noul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/score/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: score
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/VERSION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: VERSION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/withAssets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: withAssets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_6" id="__nav_15_3_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Functions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/functions/box/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function: box()
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/functions/choice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function: choice()
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/functions/image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function: image()
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        직접 해 보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        수천 개 중에서 문서 하나를 어떻게 찾을까요?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fast-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fast search란 무엇인가요?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#re-ranking_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re-ranking이란 무엇인가요?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jev-re-ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jev로 re-ranking하기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jev로 re-ranking하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jev가 돌려주는 값
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#re-ranking_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re-ranking 예제
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="re-ranking 예제">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        준비
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fast-search-passage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fast search로 passage 순위 매기기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fast-search-passage-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fast search가 정답 passage를 1위에 놓는 일은 드뭅니다
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jev-shortlist-re-ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jev로 shortlist re-ranking하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-ranking_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        re-ranking은 정답을 위쪽으로 끌어올립니다
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        다음 단계
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="re-ranking">Re-ranking<a class="headerlink" href="#re-ranking" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>CLERC 법률 query 40개에 대해 BM25로 passage 30개짜리 shortlist를 만든 다음, query와 후보 쌍마다 System One 질문 하나를 던져 top-1 정확도를 5%에서 30%로, top-10 정확도를 38%에서 65%로 끌어올립니다.</p>
+</blockquote>
+<p>문서가 수천 개 있고, 그중에서 특정 질문에 답하는 문서 하나를 찾아야 한다고 합시다.</p>
+<p>먼저 키워드 매칭처럼 빠른 방법으로 수천 개의 후보를 그럴듯한 것만 남긴 shortlist(후보
+목록)로 줄입니다. 이 단계를 fast search(빠른 검색)라고 부릅니다.</p>
+<p>fast search는 이 일은 잘하지만, shortlist의 어느 후보가 정답인지는 알려 주지 못합니다. 여기서
+re-ranking(재순위화)이 필요합니다. re-ranking은 shortlist의 모든 후보를 query(쿼리)와 직접
+맞대어 점수를 매기고, 가장 좋은 후보를 맨 앞에 놓습니다.</p>
+<p>아래에서는 두 단계를 모두 CLERC 데이터셋의 판결문 passage(구절) 3,565개에 실행합니다. BM25가
+query 40개 각각에 대해 후보 30개짜리 fast search shortlist를 만들고, 이어서 Jev가 각
+shortlist의 순위를 다시 매깁니다. re-ranking을 거치면 정답 passage가 1위에 오는 query의 비율이
+30%가 됩니다. fast search만 썼을 때는 5%였습니다.</p>
+<h2 id="_1">직접 해 보기<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><a href="https://console.typesafe.ai/playground#share/N4IgJg9gxgrgtgUwHYBcAqCAeKQC4AEIwAOiAI4wIBOAngPpZTUAOKpBpUANgIYCWcfADMIVfADc+EXiilIAzvghD8AaWQoYUANY18UPpK75mVaAjAwqCADT4UACwR6h-Yygj55KHigT4efV4BfBhmCCR8AHcHPigHfGsuPgQVKB5IgCN-AHMqDL8wADp8NCd8AFk+bUVIfCQIFHw+MA0+IRpAFAIMsCUrRIR5BB4qePxIQfrGgfFhrm79HhghpRUeKFkI4VEJKRk5RWU1DS1dfUM+YwByEzMmS2sSitEECFmqOwAxazAwFMr1tEeIoGk1AswRig9B57OURNZuBB5FZ-OtNpEeoskKD8Nl8E4uL1rPJwgo+JkuP54QEkHpTOYHjxjK0hAgNoo+JFHP56UwLJycvISmhPNz8Fg-KhYb5Yf4qjUvAgENp7J5MlQBQEgvxBNTJNJfAdVrK+GJLDy7oNFBqcg4UIoYEhWmIxZ92o58ABBRBOn1NGFigCqSD4hXwAGUfH5FABhCLeUMwdF2bkuNyqrxR1HakJhLYxOIJJIpNIZXG5fKoCzl9LLfzfCx-OWAvgg6aBHJvahIP0BDY7GKedJZfwE3rJHgUqk7KDx2SadFM3YG9FC-AASUi+AASgBRAAinpjaAP+FlEbC1kQ+DjViagx8FNbTl6gSE+UQUVEKuprT8VDgTlNRiZAtU7d4ew0ABaEl4xeXpZyocJ8nRZpFA7LsqEgqU0R2alZwUeckzkJdmCscIhjXdcmjHaUmkAHAIQOsfAilY88AHFMOwpooGsXxJkCRDkMNLZMj0Ek2T4JdeCiOxqTFIQ7ycSsmGNcDuz9JcIEyAArNlZFmeQ7ExawfE5RRqVDIYuBUZhqDgDINACJMHFEUNoU8HhmHCTkwXwBydLcqFjTFP4EQ8KhDhURwZSE0QRKQFNyjilC5DQkxISgkLyk4iDe2pMikKRSYjldU1vC9H0wD9IpAFwCDdigCJoAGYAE5WrsABGTqAFYIyKGMUBKVqADZOqKOxg2dc8ABkEHVABnyJ3x4T9vy+H4mwBKB0pxDC8qc3CxEHLFy3xBBCXwCcp22MR9X2eNsvrd0Em9ZBqo0QBMAkUfdKHwAAFS15FjXg6xKcMlTsBAihyCbKpKAAhDJtGoRRnioFBYZvURmBKcQSk+CwSgACQga8ZogMt0cxko4yQuGAHY+s+Ipmt6TqABYAAZOq67mRqgrnWvwAAKVqPRjU0ik69qRoASlIOxOB6Fp+LoCFgZ4HIEHYfBSB8bRNWUFQtjjUR5E+gIwHeWR5GA2IxjrRQxXkLgIByMsjkADAJw0ud58ARmAuEpFBLcs+1y2oLEjPPPxsFuaBgjgZ2HBlM3IvSr2yn8X2uH9wPg4Qf1U7BARFGz-BPhGHc+FtUPFHCZJZHSYwtfewIZTFJxIWNN6NXSIpLfqgAObrK-BsJcfwdrmrsdq+pF8N9wAOQATXwGXWuauWSm9FB8m0b7dlU0xBhaJy-nkLz6VmXoxR4a3qFthA-TsTlxAgQ2kBySr954Q+G7SDiDQN+SBlKhmrO+MmzQI6n1aEwYGOxgRXR6G7KgvQjj-WQJESMCUkr+CwdieQNA84ZCkjuNwZgH7YzgBCWkdh6IxSaKGaIlxjB7WDhAKIJggHNyXA-G2rYjZcnKAAbXDDpOyGx1hB2rgIp+Qjv5eFrkgOqXpvIlAAEzDx6iUOai0RGgSEJcasyIWFa34IRX+B8aS9DQPudcdhuA6gFKA-8AQJxJU7uUawikr7uE8MwXgqlYjoUfhjVsL8nJbDFOGKRPhYC8DEKnXo91+K9FCZXcqYInRZKEB6N6vonI2jtGuT0+So5YDsn8MMl9ZzvBAeefcrZ95xCaLeDGiQg7ViYdY-+dhsi1hWEcKyQRir2BSM7UU5RCbOiXLlDSGg7BRGQYEBZWFexHWMk0SkwImjUjdJFJohSPpSkKhRQYxlcm9NGdYPSGw0pHH0WYJAR96QXNfOE5+myHQKBgKGSclJbrjFbEEngehOQA2wRGKMaUUnLhkD0mZ2TKrvRqqUZKEA7z4DyAUaszylo0maEgHSjoHlbExKIZ01Y942MxPY9cGZL5gr0M8iIR95ERKGL2GJ5Q4n6RkUk4U5RgwQN6Lg6M2NsVHE9N5OYFkdixLZBEXoktRj-KaNYd4QxGqdU0ePfAbNDXD2HqLTe29hU8kclwI+EBmBAS2MYo5Uwwy9Npf-IEMcxKx3slFc8lIcitgeiI2KfEwyhjsHtfA6zuLilQO5N+xRtmGtalzAA3LY2UkQCLcBgK0O+JdzyzOoPMrivYVltiaPITw79pC31YQUuAf8VS9LFDIf8R94FCMerOIOvQ8QETttS3orI5mt3JYlZoSamops6lBNqmjaaxFSPgAAUnm7W+Bl4ICiA5SIl8hhVkagAdQrHihCCj4oahKD1MegZwYlG6lzBem8OY7w3Iy09+IeCzHOpdCITA7CBwxlsfG+Bj2XEAt-DwkR-ojC-j-T0LkgqNOaiNPq97+r4AZr1M1o1Opyyub0K+LR-IZGhAIS5dE+yrmNKYQw-E43zkmadatiBZCIEUHiawHt0HVmQepDZGh+ETuBYOoii5jDnOKmuCGthxQlFhnYcMZZvgZAMPIWcXoMaKAAGRekcCHOIMdNxQDxiUUVYYJWTAAPJcBoLQuINC4Bww5sPZq+BMPhhvZozRdgeocxGnh4eDM5YZoRlweAEgSirxGEXeQug7Acx6gzTzD7p6tV5hvLmXMObBc0WFyoEBxkUzAJu5eEBH1c1S2B9cVBJAx25qlrzj6Rqzw3gzfVIsZadffdRdKrhTQZivtCQt9EsViHSJRcYkk-hKJApEej4hGNojSoBOuZ1WhRILTKUq5RvCMdTr+nE2RkCkAAL4gDsCAektD7QYGwHgQgJAQCtjoAYQodBq1WCYLrF7UI7K61IA0IOis9avcIlQLQq4gcgArhQagehGAsB4mTSYUDBCBEDOGYQFgS3GF7Z0u1DqMS5IrdEDUKBJTNDgIgP4-F7MBDMI6V85xYUxM8rcNkePUAZrFB9hKMDrIqFTlxpUkQrxdkareS6-OVZgEYxrK+m68QY+ox96sp97hOU6OMCAkwWEPkBc+c8EkDDGJ2gG0iZgKKhjSmKBHtBxSYCYEhZhSAP4o3QswiOAvUI+VQAAfjB5wSn1ApJ-f1lDnWT3SAV2HH8BXfgMqa03QdyVOwjdPnkE4FO-gzftCc1DykdgDtOhGGAOwrlCSuKUGIVwGwMpU+7NRh3lAnfI7d01VpmQkyTBhLcl+Uu2cJSKCHkArguBDFh-H+XivgTK-8K2fy1ALp6ApcowCSTVT2p2jsSAGwNRIAQBmlhExK1eEnozl2UjC87XeUiO3vL-CO6Ry7lHAxkglVURd87l3rteR8AABqqMcgT2IA4gnUV2hA1k+kFgzwrQU+T2oiIAEkFgdAiK3gIAAAuudkAA">TypeSafe Playground에서 이 예제 열기</a></p>
+<h2 id="_2">수천 개 중에서 문서 하나를 어떻게 찾을까요?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>모든 문서를 하나씩 query와 대조하면 문서 하나당 비교가 한 번 필요합니다. 문서가 수백만
+개라면 query 하나에 비교도 수백만 번입니다. 두 단계로 나누면 더 빠릅니다.</p>
+<ol>
+<li>전체 더미에 돌릴 수 있을 만큼 빠른 방법으로, 더미를 가능성 높은 후보만 남긴 짧은 목록으로
+   줄입니다.</li>
+<li>그 짧은 목록에 더 정확한 단계를 적용해 정확한 정답을 찾습니다.</li>
+</ol>
+<p><img alt="애니메이션 다이어그램: 문서 더미가 fast search shortlist로 좁혀지고, 이어서 re-ranking이
+그 shortlist의 순서를 바꿔 정답이 맨 위로
+올라옵니다" src="https://mintcdn.com/ts-docs/2NirYCl-v96cw05F/cookbooks/rerank_typesafe/two-step-search-intro-diagram.svg?fit=max\&amp;auto=format\&amp;n=2NirYCl-v96cw05F\&amp;q=85\&amp;s=796d5d4efd82f8396f380f2e1e14a9de" /></p>
+<h2 id="fast-search">fast search란 무엇인가요?<a class="headerlink" href="#fast-search" title="Permanent link">&para;</a></h2>
+<p>fast search는 query를 큰 corpus(코퍼스)의 모든 문서와 비교해 순위가 매겨진 shortlist를 빠르게
+돌려줄 수 있는 방법을 모두 가리킵니다. 흔히 쓰는 방법으로는 BM25 같은 키워드 검색과, passage를
+의미로 비교하는 dense embedding(밀집 임베딩)이 있습니다.</p>
+<p>여기서 첫 단계는 BM25이고 다른 것은 쓰지 않습니다. BM25는 공통으로 들어 있는 단어를 기준으로
+passage 순위를 매깁니다. 어떤 fast search 방법을 고르는지는 부차적인 문제입니다. re-ranking은
+shortlist에 든 passage만 보기 때문입니다.</p>
+<h2 id="re-ranking_1">re-ranking이란 무엇인가요?<a class="headerlink" href="#re-ranking_1" title="Permanent link">&para;</a></h2>
+<p>re-ranking은 shortlist를 더 나은 순서로 정렬합니다. query를 corpus 전체와 한꺼번에 비교하는
+대신, shortlist의 후보 하나하나에 대해 query와의 점수를 매기고 그 점수로 정렬합니다.</p>
+<p><img alt="다이어그램: 왼쪽에는 순위가 매겨진 shortlist, 가운데에는 &quot;re-rank&quot;라고 적힌 화살표,
+오른쪽에는 순서가 바뀐 shortlist가 있고 실제 정답이 중간에서 맨 위로
+올라갑니다" src="https://mintcdn.com/ts-docs/2NirYCl-v96cw05F/cookbooks/rerank_typesafe/rerank-diagram.png?fit=max\&amp;auto=format\&amp;n=2NirYCl-v96cw05F\&amp;q=85\&amp;s=f302253df43240e6ad7ea788cf3ba02e" /></p>
+<p>이 점수는 언어 모델에서 얻을 수 있습니다. query와 후보 하나를 함께 주고, 그 후보가 query에
+얼마나 잘 답하는지 묻습니다. 그러면 re-ranking은 표현이 query와 다르더라도 shortlist에서 가장
+잘 맞는 후보를 찾아냅니다.</p>
+<h2 id="jev-re-ranking">Jev로 re-ranking하기<a class="headerlink" href="#jev-re-ranking" title="Permanent link">&para;</a></h2>
+<p>re-ranker에는 모든 query와 후보 쌍에 대해 서로 비교할 수 있는 점수가 필요합니다.</p>
+<h3 id="jev">Jev가 돌려주는 값<a class="headerlink" href="#jev" title="Permanent link">&para;</a></h3>
+<p>TypeSafe에서는 점수를 요청하는 일이 곧 예/아니요 질문입니다.</p>
+<div class="highlight"><pre><span></span><code>Could this candidate passage be from the cited precedent?
+</code></pre></div>
+<p>단순한 예 또는 아니요만으로는 후보 30개의 순위를 매길 수 없습니다. <code>Noul</code>은 그 대신 0과 1
+사이의 숫자를 돌려주며, 이 숫자를
+<a href="../../primitives/noul/">noul</a>이라고 부릅니다. noul은 답이 "예"일
+가능성을 Jev가 추정한 값입니다.</p>
+<p>무엇이 true이고 무엇이 false인지는 질문의 criteria(판단 기준)가 정합니다. Jev는 이 criteria를
+모든 query와 후보 쌍에 적용해 noul을 바로 돌려줍니다. 애플리케이션은 이 noul을 점수로 삼아
+정렬합니다.</p>
+<p>단순화한 의사 코드로 보면 TypeSafe 점수 호출 하나는 다음과 같습니다.</p>
+<div class="highlight"><span class="filename">Sketch</span><pre><span></span><code><span class="n">question</span> <span class="o">=</span> <span class="n">Noul</span><span class="p">(</span>
+    <span class="n">instructions</span><span class="o">=</span><span class="s2">"Is this candidate the cited case?"</span><span class="p">,</span>
+    <span class="n">criteria</span><span class="o">=</span><span class="n">NoulCriteria</span><span class="p">(</span>
+        <span class="n">true</span><span class="o">=</span><span class="s2">"The candidate states the specific rule the query cites."</span><span class="p">,</span>
+        <span class="n">false</span><span class="o">=</span><span class="s2">"The candidate is only on a similar topic."</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">system_one</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="n">questions</span><span class="o">=</span><span class="p">{</span><span class="s2">"is_cited_source"</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+<span class="n">response</span><span class="o">.</span><span class="n">answers</span><span class="p">[</span><span class="s2">"is_cited_source"</span><span class="p">]</span><span class="o">.</span><span class="n">noul</span>  <span class="c1"># -&gt; 0.87</span>
+</code></pre></div>
+<p>shortlist를 re-ranking하려면 모든 후보에 같은 질문을 던지고 noul이 높은 순으로 정렬합니다.</p>
+<div class="highlight"><span class="filename">Sketch</span><pre><span></span><code><span class="n">nouls</span> <span class="o">=</span> <span class="p">{</span><span class="n">candidate</span><span class="p">:</span> <span class="n">ask_typesafe</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">candidate</span><span class="p">)</span> <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">shortlist</span><span class="p">}</span>
+<span class="n">reranked</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">shortlist</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">nouls</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># noul이 높은 순</span>
+</code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    q["query 발췌문&lt;br/&gt;&lt;i&gt;판결문 passage 하나,&lt;br/&gt;인용 제거됨&lt;/i&gt;"]
+    sl["fast search로 만든 shortlist"]
+    quest["&lt;b&gt;Noul 하나&lt;/b&gt;&lt;br/&gt;이 후보가 인용된 판례에서&lt;br/&gt;나온 것일 수 있는가?&lt;br/&gt;&lt;i&gt;criteria로 true와 false를 고정&lt;/i&gt;"]
+
+    %% LR 차트 안에 direction LR을 두면 각 state가 자기 noul 옆에 놓여 두 열이 되므로,
+    %% fan-out의 높이가 여덟 행이 아니라 네 행이 됩니다
+    subgraph fan["후보마다 요청 하나 · 요청끼리는 서로를 보지 못함"]
+        direction LR
+        d1["state&lt;br/&gt;{query, candidate 1}"] --&gt; n1["noul&lt;br/&gt;0.87"]
+        d2["state&lt;br/&gt;{query, candidate 2}"] --&gt; n2["noul&lt;br/&gt;0.41"]
+        dx["⋮"] --&gt; nx["⋮"]
+        d30["state&lt;br/&gt;{query, candidate n}"] --&gt; n30["noul&lt;br/&gt;0.12"]
+    end
+
+    sort["noul로 정렬,&lt;br/&gt;높은 순"]
+    out["re-ranking된 shortlist&lt;br/&gt;&lt;i&gt;같은 후보, 더 나은 순서&lt;/i&gt;"]
+
+    q --&gt; fan
+    sl --&gt; fan
+    quest --&gt; fan
+    fan --&gt; sort --&gt; out
+
+    %% 생략 표시는 노드가 아니므로, 상자를 없애 "이하 생략"으로 읽히게 합니다
+    classDef elide fill:none,stroke:none
+    class dx,nx elide
+    linkStyle 2 stroke:none</code></pre>
+<h2 id="re-ranking_2">re-ranking 예제<a class="headerlink" href="#re-ranking_2" title="Permanent link">&para;</a></h2>
+<p>이제 fast search와 re-ranking을 법률 검색 데이터셋인
+<a href="https://aclanthology.org/2025.findings-naacl.441/">CLERC</a>에 실행합니다.
+이 예제는 판결문 passage 3,565개와 query 40개를 사용합니다.</p>
+<h3 id="_3">준비<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>bm25s</code>와 <code>datasets</code>로 fast search shortlist를 만듭니다.</li>
+<li><code>typesafe-sdk</code>와 <code>cooksafe</code>로 re-ranking과 API 캐싱을 처리합니다.</li>
+<li><code>matplotlib</code>으로 결과 차트를 그립니다.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>bm25s<span class="w"> </span>datasets<span class="w"> </span>matplotlib<span class="w"> </span><span class="s1">'cooksafe&gt;=0.3.0,&lt;0.4.0'</span>
+</code></pre></div>
+<p>TypeSafe를 호출하려면 <code>TYPESAFE_API_KEY</code>가 필요합니다.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cooksafe</span><span class="w"> </span><span class="kn">import</span> <span class="n">JsonCache</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typesafe_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Noul</span><span class="p">,</span> <span class="n">NoulCriteria</span><span class="p">,</span> <span class="n">TypeSafeClient</span>
+
+<span class="n">TYPESAFE_MODEL</span> <span class="o">=</span> <span class="s2">"jev-1.14.0"</span>  <span class="c1"># 이 페이지에서 쓴 모델입니다. "jev-latest"로 바꾸면 최신 모델을 실시간으로 호출합니다</span>
+<span class="n">N_ROWS</span> <span class="o">=</span> <span class="mi">170</span>  <span class="c1"># 공유 corpus로 모으는 CLERC 행 수</span>
+<span class="n">N_QUERIES</span> <span class="o">=</span> <span class="mi">40</span>  <span class="c1"># 평가하는 행 수</span>
+<span class="n">TOP_K</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># query마다 shortlist가 re-ranker에 넘기는 후보 수</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">TypeSafeClient</span><span class="p">(</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s2">"TYPESAFE_API_KEY"</span><span class="p">,</span> <span class="s2">"cache-only"</span>
+    <span class="p">),</span>  <span class="c1"># 키가 없는 커널은 캐시를 재생합니다</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"TYPESAFE_ENDPOINT"</span><span class="p">),</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="mf">120.0</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">EXAMPLES_URL</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"https://raw.githubusercontent.com/typesafe-ai/typesafe-public-examples/main/"</span>
+    <span class="s2">"cookbooks/rerank_typesafe"</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Fetch one of this cookbook's files from typesafe-public-examples unless it is on disk."""</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">EXAMPLES_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span>
+
+
+<span class="n">CACHE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"rerank_typesafe_cache.json"</span><span class="p">)</span>
+<span class="c1"># True이면 공개된 답변으로 CACHE를 채우므로 실행 중에 요청을 보내지 않습니다. 실시간으로</span>
+<span class="c1"># 실행하려면 False로 바꾸고 CACHE를 삭제하세요. 디스크에 이미 있는 CACHE는 덮어쓰지 않습니다.</span>
+<span class="n">DOWNLOAD_CACHE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">if</span> <span class="n">DOWNLOAD_CACHE</span><span class="p">:</span>
+    <span class="n">download</span><span class="p">(</span><span class="n">CACHE</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">json_cache</span> <span class="o">=</span> <span class="n">JsonCache</span><span class="p">(</span><span class="n">CACHE</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="fast-search-passage">fast search로 passage 순위 매기기<a class="headerlink" href="#fast-search-passage" title="Permanent link">&para;</a></h3>
+<p>여기서 쓰는 데이터셋은 미국 법원 판결문으로 이루어진 corpus이며, 170개 행을 한데 모은
+것입니다. 각 행은 다음과 같이 나뉩니다.</p>
+<ul>
+<li><strong>Query</strong>: 인용 하나가 제거된 판결문 발췌문입니다.</li>
+<li><strong>Gold</strong>: 제거된 인용이 가리키던 passage로, 해당 query의 유일한 정답입니다.</li>
+<li><strong>Candidates</strong>: corpus의 나머지 모든 passage입니다. 하나하나가 query와 잘못 짝지어질 수 있는
+  대상입니다.</li>
+</ul>
+<p>170개 행 가운데 40개를 골라 query로 평가합니다. 나머지 130개는 후보로만 등장합니다.</p>
+<p>fast search는 corpus를 불러와 BM25로 모든 query에 대해 순위를 매깁니다. 아직 Jev는 관여하지
+않습니다.</p>
+<div class="highlight"><pre><span></span><code><span class="n">CLERC_FILE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"https://huggingface.co/datasets/jhu-clsp/CLERC/resolve/main/"</span>
+    <span class="s2">"teva_train_dir/train_data.jsonl.gz"</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cid</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Corpus id: a content hash, so passages shared across queries dedupe."""</span>
+    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
+
+
+<span class="nd">@json_cache</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_slice</span><span class="p">(</span><span class="n">n_rows</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_queries</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Stream CLERC rows, pool ``n_rows`` of them into a corpus, pick ``n_queries`` to evaluate."""</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span>  <span class="c1"># 무거운 import이므로 함수 안에 둡니다</span>
+
+    <span class="n">stream</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">"json"</span><span class="p">,</span> <span class="n">data_files</span><span class="o">=</span><span class="n">CLERC_FILE</span><span class="p">,</span> <span class="n">streaming</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">"train"</span><span class="p">)</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"positive_passages"</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"negative_passages"</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[])</span> <span class="o">==</span> <span class="mi">20</span>
+        <span class="p">):</span>
+            <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">picked</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">)</span>
+    <span class="n">corpus</span><span class="p">,</span> <span class="n">pool</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">picked</span><span class="p">:</span>
+        <span class="n">gold</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">"positive_passages"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"text"</span><span class="p">]</span>
+        <span class="n">corpus</span><span class="p">[</span><span class="n">cid</span><span class="p">(</span><span class="n">gold</span><span class="p">)]</span> <span class="o">=</span> <span class="n">gold</span>
+        <span class="k">for</span> <span class="n">neg</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">"negative_passages"</span><span class="p">]:</span>
+            <span class="n">corpus</span><span class="p">[</span><span class="n">cid</span><span class="p">(</span><span class="n">neg</span><span class="p">[</span><span class="s2">"text"</span><span class="p">])]</span> <span class="o">=</span> <span class="n">neg</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span>
+        <span class="n">pool</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">"qid"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"query_id"</span><span class="p">]),</span> <span class="s2">"query"</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">"query"</span><span class="p">],</span> <span class="s2">"gold"</span><span class="p">:</span> <span class="n">cid</span><span class="p">(</span><span class="n">gold</span><span class="p">)}</span>
+        <span class="p">)</span>
+    <span class="c1"># 모아 둔 행 중 처음 20개는 떼어 두고, 나머지에서 평가합니다</span>
+    <span class="n">queries</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">pool</span><span class="p">[</span><span class="mi">20</span><span class="p">:],</span> <span class="n">n_queries</span><span class="p">)</span>
+    <span class="c1"># corpus를 id로 정렬해 실시간 실행이든 캐시 재생이든 매번 같은 순서로 순회하게 합니다</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"queries"</span><span class="p">:</span> <span class="n">queries</span><span class="p">,</span> <span class="s2">"corpus"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">items</span><span class="p">()))}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">bm25_rankings</span><span class="p">(</span><span class="n">corpus</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">queries</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Rank every passage in the corpus by word overlap with each query."""</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">bm25s</span>
+
+    <span class="n">cids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    <span class="n">retriever</span> <span class="o">=</span> <span class="n">bm25s</span><span class="o">.</span><span class="n">BM25</span><span class="p">()</span>
+    <span class="n">retriever</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">bm25s</span><span class="o">.</span><span class="n">tokenize</span><span class="p">([</span><span class="n">corpus</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cids</span><span class="p">],</span> <span class="n">stopwords</span><span class="o">=</span><span class="s2">"en"</span><span class="p">))</span>
+    <span class="n">qids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span>
+    <span class="n">idxs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span>
+        <span class="n">bm25s</span><span class="o">.</span><span class="n">tokenize</span><span class="p">([</span><span class="n">queries</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">qids</span><span class="p">],</span> <span class="n">stopwords</span><span class="o">=</span><span class="s2">"en"</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cids</span><span class="p">))</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">q</span><span class="p">:</span> <span class="p">[</span><span class="n">cids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idxs</span><span class="p">[</span><span class="n">row</span><span class="p">]]</span> <span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qids</span><span class="p">)}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">gold_rank</span><span class="p">(</span><span class="n">ranked</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">gold</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""1-based rank of the gold id, or None if it isn't in the list."""</span>
+    <span class="k">return</span> <span class="n">ranked</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gold</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">gold</span> <span class="ow">in</span> <span class="n">ranked</span> <span class="k">else</span> <span class="kc">None</span>
+
+
+<span class="c1"># 문서 페이지에서는 각 차트가 밝은 테마 또는 어두운 테마에 맞춰 표시되고, 노트북에서는 밝은 쪽만 표시됩니다.</span>
+<span class="n">PALETTES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"light"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"surface"</span><span class="p">:</span> <span class="s2">"#ffffff"</span><span class="p">,</span> <span class="s2">"ink"</span><span class="p">:</span> <span class="s2">"#34342f"</span><span class="p">,</span> <span class="s2">"muted"</span><span class="p">:</span> <span class="s2">"#7c7c77"</span><span class="p">,</span> <span class="s2">"grid"</span><span class="p">:</span> <span class="s2">"#d8d8cf"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="s2">"#5d76a2"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="s2">"#6f9b52"</span><span class="p">},</span>
+    <span class="s2">"dark"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"surface"</span><span class="p">:</span> <span class="s2">"#0d0a0f"</span><span class="p">,</span> <span class="s2">"ink"</span><span class="p">:</span> <span class="s2">"#fafafa"</span><span class="p">,</span> <span class="s2">"muted"</span><span class="p">:</span> <span class="s2">"#a1a1aa"</span><span class="p">,</span> <span class="s2">"grid"</span><span class="p">:</span> <span class="s2">"#3f3f46"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="s2">"#8fa6d6"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="s2">"#93c47d"</span><span class="p">},</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="n">draw</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Display ``draw(palette)`` in the light palette. The docs build sets COOKSAFE_RENDER and</span>
+<span class="sd">    also gets the dark copy."""</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+    <span class="k">for</span> <span class="n">theme</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"light"</span><span class="p">,</span> <span class="s2">"dark"</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"COOKSAFE_RENDER"</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="s2">"light"</span><span class="p">,):</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">draw</span><span class="p">(</span><span class="n">PALETTES</span><span class="p">[</span><span class="n">theme</span><span class="p">])</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">"theme"</span><span class="p">:</span> <span class="n">theme</span><span class="p">})</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">bar_chart</span><span class="p">(</span><span class="n">labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">shares</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""A small single-series bar chart of shares (0-1, shown as percentages)."""</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"surface"</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"surface"</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">side</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"top"</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">side</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">side</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"left"</span><span class="p">,</span> <span class="s2">"bottom"</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">side</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"grid"</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"muted"</span><span class="p">],</span> <span class="n">labelcolor</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"ink"</span><span class="p">],</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_axisbelow</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"grid"</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+    <span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">shares</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.55</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="s2">"blue"</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="s2">"green"</span><span class="p">]][:</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span>
+        <span class="n">bars</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">s</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%"</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">shares</span><span class="p">],</span>
+        <span class="n">padding</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"ink"</span><span class="p">],</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">"0%"</span><span class="p">,</span> <span class="s2">"25%"</span><span class="p">,</span> <span class="s2">"50%"</span><span class="p">,</span> <span class="s2">"75%"</span><span class="p">,</span> <span class="s2">"100%"</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">"share of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span><span class="si">}</span><span class="s2"> queries"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"ink"</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"ink"</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">fig</span>
+
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">build_slice</span><span class="p">(</span><span class="n">N_ROWS</span><span class="p">,</span> <span class="n">N_QUERIES</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">corpus</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"corpus"</span><span class="p">]</span>
+<span class="n">queries</span> <span class="o">=</span> <span class="p">{</span><span class="n">q</span><span class="p">[</span><span class="s2">"qid"</span><span class="p">]:</span> <span class="n">q</span><span class="p">[</span><span class="s2">"query"</span><span class="p">]</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"queries"</span><span class="p">]}</span>
+<span class="n">golds</span> <span class="o">=</span> <span class="p">{</span><span class="n">q</span><span class="p">[</span><span class="s2">"qid"</span><span class="p">]:</span> <span class="n">q</span><span class="p">[</span><span class="s2">"gold"</span><span class="p">]</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"queries"</span><span class="p">]}</span>
+
+<span class="n">candidates</span> <span class="o">=</span> <span class="p">{</span><span class="n">q</span><span class="p">:</span> <span class="n">ranked</span><span class="p">[:</span><span class="n">TOP_K</span><span class="p">]</span> <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">ranked</span> <span class="ow">in</span> <span class="n">bm25_rankings</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">queries</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+<span class="n">in_top_k</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">golds</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">)</span>
+<span class="n">at_rank_1</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">candidates</span><span class="p">[</span><span class="n">q</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">golds</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">)</span>
+
+<span class="n">show</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">bar_chart</span><span class="p">(</span>
+    <span class="p">[</span><span class="sa">f</span><span class="s2">"In top </span><span class="si">{</span><span class="n">TOP_K</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"At rank 1"</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">in_top_k</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">),</span> <span class="n">at_rank_1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">)],</span>
+    <span class="sa">f</span><span class="s2">"Where the correct passage lands, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span><span class="si">}</span><span class="s2"> queries against </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> candidates"</span><span class="p">,</span>
+    <span class="n">p</span><span class="p">,</span>
+<span class="p">))</span>
+</code></pre></div>
+<p><img alt="output" src="https://mintcdn.com/ts-docs/Jekhcl_2QPf6976X/cookbooks/rerank_typesafe/rerank_typesafe.executed.1.png?fit=max\&amp;auto=format\&amp;n=Jekhcl_2QPf6976X\&amp;q=85\&amp;s=b759df7cbe26cb29ff1524a054f694b1" /></p>
+<h3 id="fast-search-passage-1">fast search가 정답 passage를 1위에 놓는 일은 드뭅니다<a class="headerlink" href="#fast-search-passage-1" title="Permanent link">&para;</a></h3>
+<p>이 차트는 후보 3,565개 가운데 fast search가 정답 passage를 어디에 놓는지 보여 줍니다.</p>
+<p>shortlist는 query 40개 모두(100%)에서 정답을 포함하지만, 정답을 1위에 놓는 경우는 5%뿐입니다.</p>
+<p>re-ranking은 이미 shortlist에 있는 상위 30개 후보의 순서만 바꿉니다. fast search가 고르지
+않은 passage를 추가할 수는 없습니다.</p>
+<h3 id="jev-shortlist-re-ranking">Jev로 shortlist re-ranking하기<a class="headerlink" href="#jev-shortlist-re-ranking" title="Permanent link">&para;</a></h3>
+<p>Jev가 각 쌍에 대해 답하는 질문은, 그 후보가 query에서 제거된 인용이 가리키는 passage일 수
+있느냐입니다. re-ranking은 세 단계로 진행합니다.</p>
+<ol>
+<li>그 질문을 정의합니다.</li>
+<li>모든 shortlist의 후보마다 한 번씩 묻습니다. query 40개에 후보 30개를 곱해 1,200번의
+   호출이며, 동시에 실행합니다.</li>
+<li>Jev가 돌려준 noul로 각 shortlist를 정렬합니다.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="n">is_cited_source</span> <span class="o">=</span> <span class="n">Noul</span><span class="p">(</span>
+    <span class="n">instructions</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">"The query excerpt comes from a US federal court opinion and was written "</span>
+        <span class="s2">"immediately around a citation to a precedent; the citation itself has been "</span>
+        <span class="s2">"removed. Could the candidate passage be from that cited precedent — does it "</span>
+        <span class="s2">"establish the specific legal proposition the query excerpt invokes at its "</span>
+        <span class="s2">"citation point?"</span>
+    <span class="p">),</span>
+    <span class="n">criteria</span><span class="o">=</span><span class="n">NoulCriteria</span><span class="p">(</span>
+        <span class="n">true</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">"The candidate passage states or establishes the specific rule, standard, "</span>
+            <span class="s2">"holding, or fact pattern that the query excerpt attributes to its removed "</span>
+            <span class="s2">"citation."</span>
+        <span class="p">),</span>
+        <span class="n">false</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">"The candidate passage is merely on a similar topic or doctrine; it does not "</span>
+            <span class="s2">"supply the specific proposition the query excerpt relies on."</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="nd">@json_cache</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">score_candidate</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">question_json</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""One TypeSafe call about one (query, candidate) pair: a noul, plus token usage."""</span>
+    <span class="c1"># SDK는 질문을 JSON dict로 받으므로, 캐시된 문자열을 디코딩해 그대로 넘깁니다</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">question_json</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">system_one</span><span class="p">(</span>
+        <span class="n">state</span><span class="o">=</span><span class="p">{</span><span class="s2">"query_excerpt"</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span> <span class="s2">"candidate_passage"</span><span class="p">:</span> <span class="n">candidate</span><span class="p">},</span>
+        <span class="n">questions</span><span class="o">=</span><span class="p">{</span><span class="s2">"is_cited_source"</span><span class="p">:</span> <span class="n">question</span><span class="p">},</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"noul"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">answers</span><span class="p">[</span><span class="s2">"is_cited_source"</span><span class="p">]</span><span class="o">.</span><span class="n">noul</span><span class="p">,</span>
+        <span class="s2">"input_tokens"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">usage</span><span class="o">.</span><span class="n">input_tokens</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"output_tokens"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">usage</span><span class="o">.</span><span class="n">output_tokens</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">}</span>
+
+
+<span class="c1"># query 40개에 후보가 30개씩 있으므로 모든 shortlist를 re-ranking하려면 독립적인 호출이 1,200번</span>
+<span class="c1"># 필요합니다. 하나씩 차례로 보내지 않고 스레드 풀로 한꺼번에 보내도 될 만큼 가볍습니다.</span>
+<span class="n">pair_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">queries</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">[</span><span class="n">q</span><span class="p">]]</span>
+<span class="n">question_json</span> <span class="o">=</span> <span class="n">is_cited_source</span><span class="o">.</span><span class="n">model_dump_json</span><span class="p">(</span><span class="n">exclude_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">score_candidate</span><span class="p">(</span>
+            <span class="n">queries</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">corpus</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">question_json</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">TYPESAFE_MODEL</span>
+        <span class="p">),</span>
+        <span class="n">pair_list</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="n">pair_scores</span> <span class="o">=</span> <span class="p">{</span><span class="n">q</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">}</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pair_list</span><span class="p">,</span> <span class="n">results</span><span class="p">):</span>
+    <span class="n">pair_scores</span><span class="p">[</span><span class="n">q</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+
+<span class="n">reranked</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">q</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">candidates</span><span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="o">-</span><span class="n">pair_scores</span><span class="p">[</span><span class="n">q</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s2">"noul"</span><span class="p">])</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">queries</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chart_before_after</span><span class="p">(</span>
+    <span class="n">runs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span> <span class="n">thresholds</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">p</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Grouped bar chart: how often the correct passage lands in the top N, for each run."""</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">runs</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="s2">"blue"</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="s2">"green"</span><span class="p">]]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">share_in_top</span><span class="p">(</span><span class="n">rankings</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span>
+            <span class="n">gold_rank</span><span class="p">(</span><span class="n">rankings</span><span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="n">golds</span><span class="p">[</span><span class="n">q</span><span class="p">])</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">queries</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"surface"</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"surface"</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">side</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"top"</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">side</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">side</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"left"</span><span class="p">,</span> <span class="s2">"bottom"</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">side</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"grid"</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"muted"</span><span class="p">],</span> <span class="n">labelcolor</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"ink"</span><span class="p">],</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_axisbelow</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"grid"</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">))</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="mf">0.35</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">rankings</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">runs</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="n">shares</span> <span class="o">=</span> <span class="p">[</span><span class="n">share_in_top</span><span class="p">(</span><span class="n">rankings</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">]</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">width</span>
+        <span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">shares</span><span class="p">,</span> <span class="n">width</span> <span class="o">*</span> <span class="mf">0.92</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span>
+            <span class="n">bars</span><span class="p">,</span>
+            <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">s</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%"</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">shares</span><span class="p">],</span>
+            <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"ink"</span><span class="p">],</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mf">8.5</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"top </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">"0%"</span><span class="p">,</span> <span class="s2">"25%"</span><span class="p">,</span> <span class="s2">"50%"</span><span class="p">,</span> <span class="s2">"75%"</span><span class="p">,</span> <span class="s2">"100%"</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">"share of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span><span class="si">}</span><span class="s2"> queries"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"ink"</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+        <span class="s2">"How often the correct passage lands near the top"</span><span class="p">,</span>
+        <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"ink"</span><span class="p">],</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"ink"</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"upper left"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">fig</span>
+
+
+<span class="n">show</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">chart_before_after</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">"Fast search"</span><span class="p">:</span> <span class="n">candidates</span><span class="p">,</span> <span class="s2">"+ Jev 1.14 re-rank"</span><span class="p">:</span> <span class="n">reranked</span><span class="p">},</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">p</span>
+<span class="p">))</span>
+</code></pre></div>
+<p><img alt="output" src="https://mintcdn.com/ts-docs/Jekhcl_2QPf6976X/cookbooks/rerank_typesafe/rerank_typesafe.executed.3.png?fit=max\&amp;auto=format\&amp;n=Jekhcl_2QPf6976X\&amp;q=85\&amp;s=a7d197e70410fd097c50a0e48008c9bf" /></p>
+<h3 id="re-ranking_3">re-ranking은 정답을 위쪽으로 끌어올립니다<a class="headerlink" href="#re-ranking_3" title="Permanent link">&para;</a></h3>
+<p>이 차트는 fast search만 쓴 경우와 fast search에 re-ranking을 더한 경우를 세 가지
+threshold(임계값)에서 비교합니다. re-ranking은 세 경우 모두에서 정답 passage를 더 위쪽으로
+옮깁니다.</p>
+<ul>
+<li><strong>Top 1</strong>: 5% → 30%</li>
+<li><strong>Top 5</strong>: 15% → 57%</li>
+<li><strong>Top 10</strong>: 38% → 65%</li>
+</ul>
+<p>이 예제에서는 이해하기 쉽도록 쌍마다 질문을 하나만 던졌습니다. 실제 애플리케이션이라면 같은
+쌍에 대한 질문 여러 개를 호출 하나에 담을 것입니다. 방법은 <a href="../parallel_questions/">병렬 질문
+cookbook(예제 모음)</a>과
+<a href="../../patterns/fan-out/">Speculative fan-out(팬아웃) 패턴</a>을 참고하세요.</p>
+<hr />
+<h2 id="_4">다음 단계<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../primitives/noul/">Noul</a>: Jev가 예/아니요 질문을 점수로 바꾸는
+  방식을 설명합니다.</li>
+<li><a href="../../patterns/fan-out/">Speculative fan-out</a>: 문서 하나에 대한
+  질문 여러 개를 호출 하나로 묻는 방법을 설명합니다.</li>
+<li><a href="../semantic_find/">Line-by-line Search</a>:
+  키워드가 아니라 의미로 corpus를 검색하는 또 다른 방법을 설명합니다.</li>
+</ul>
+<p>이 문서는 개발자 문서 플랫폼인 <a href="https://mintlify.com">Mintlify</a>로 제작하고 호스팅합니다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../feeder_watch/" class="md-footer__link md-footer__link--prev" aria-label="이전: 새 모이통 카메라 방문 기록">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                새 모이통 카메라 방문 기록
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../infinite_cardinality_choice/" class="md-footer__link md-footer__link--next" aria-label="다음: 무한 cardinality Choice">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                무한 cardinality Choice
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      비공식 한국어 번역본입니다. 원문과 저작권은 TypeSafe에 있습니다: <a href="https://docs.typesafe.ai">docs.typesafe.ai</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

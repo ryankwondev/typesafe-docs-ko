@@ -1,0 +1,6589 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TypeSafe System One API 문서의 비공식 한국어 번역">
+      
+      
+      
+        <link rel="canonical" href="https://ryankwondev.github.io/typesafe-docs-ko/cookbooks/autoformat/">
+      
+      
+        <link rel="prev" href="../pre_parsed_value_extraction_cookbook/">
+      
+      
+        <link rel="next" href="../cart_from_primitives/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>구조 복원 - TypeSafe 문서 (비공식 한국어 번역)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    <meta name="robots" content="noindex, nofollow">
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="TypeSafe 문서 (비공식 한국어 번역)" class="md-header__button md-logo" aria-label="TypeSafe 문서 (비공식 한국어 번역)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TypeSafe 문서 (비공식 한국어 번역)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              구조 복원
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TypeSafe 문서 (비공식 한국어 번역)" class="md-nav__button md-logo" aria-label="TypeSafe 문서 (비공식 한국어 번역)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TypeSafe 문서 (비공식 한국어 번역)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작하기
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    시작하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    빠른 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/coding-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    코딩 에이전트와 Jev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/machine-learning-primer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 입문
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개념
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    개념
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/use-case-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    사용 사례
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/system-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System One
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/how-to-build-with-system-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TypeSafe로 구축하는 방법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primitives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primitives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primitive(질문)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/choice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Choice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/score/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Score
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/noul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/box/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Box
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced: structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    이미지
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../confidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Confidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    패턴
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    패턴
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    패턴
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/fan-out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Speculative fan-out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/noul-screen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noul로 먼저 선별하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/companion-noul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Companion Noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/confidence-routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Confidence 기반 routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/probability-routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    확률 기반 routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/composite-scoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Composite scoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookbooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cookbooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../function_calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skill_suggestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skill 추천
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../llm_guardrails/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM을 위한 Guardrail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../citation_check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    인용 재확인
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verify_llm_outputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM의 답을 출처에 비추어 검증하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classifying_rag_passages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG passage 분류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic_memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    간단한 메모리 시스템
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hierarchical_classification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    계층적 분류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classification_using_confidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    confidence를 활용한 분류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../twitch_chat_filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Twitch 채팅 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sde_cascade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDE cascade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../date_extraction_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    날짜 추출
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pre_parsed_value_extraction_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    미리 파싱한 값 추출
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    구조 복원
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    구조 복원
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        준비
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        문서: 서식이 사라진 팀 메모
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 끊긴 문장 이어 붙이기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 블록 분류
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        렌더링
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playground" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playground에서 열어 보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cart_from_primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    장바구니
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reading_scanned_documents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스캔한 예방접종 기록 읽기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ocr_confidence_bounding_boxes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OCR confidence와 bounding box
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feeder_watch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    새 모이통 카메라 방문 기록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rerank_typesafe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Re-ranking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../infinite_cardinality_choice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    무한 cardinality Choice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../semantic_find/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    줄 단위 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entity_alignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge graph의 entity alignment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intelliprompter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intelliprompter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../consistency_choice_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-consistency: Choice 질문
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../consistency_noul_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-consistency(자기 일관성): noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parallel_questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parallel questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoresearch_feature_discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autoresearch feature 탐색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    데모
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    데모
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jev로 만든 프로젝트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/airbnb-listing-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google Sheets에서 Airbnb 숙소 검색하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/smart-home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스마트 홈 어시스턴트 데모
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/content-audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jev로 하는 콘텐츠 감사
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모델
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agent-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent skill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    법적 고지
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model-jaggedness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model jaggedness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모델 변경 이력
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/system-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System One
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/list-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모델 목록 조회
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    요청 규칙과 오류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SDK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    클라이언트 SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2" id="__nav_15_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TypeSafe Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_2" id="__nav_15_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    사용법
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    사용법
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/usage/basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기본 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/usage/advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    고급 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    변경 이력
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_4" id="__nav_15_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API 레퍼런스
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_4_2" id="__nav_15_2_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clients
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clients
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/clients/async/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    비동기 클라이언트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/clients/sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    동기 클라이언트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_4_3" id="__nav_15_2_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Types
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    질문
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/responses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    답변과 응답
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공통 타입
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/retries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    예외
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/constants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    상수
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3" id="__nav_15_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JavaScript
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    JavaScript
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JavaScript SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    변경 이력
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3" id="__nav_15_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API 레퍼런스
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_2" id="__nav_15_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIConnectionError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIConnectionError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIPromise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIPromise&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APITimeoutError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APITimeoutError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIUserAbortError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIUserAbortError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/AuthenticationError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: AuthenticationError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/BadRequestError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: BadRequestError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/Image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: Image
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/InternalServerError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: InternalServerError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/NotFoundError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: NotFoundError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/PermissionDeniedError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: PermissionDeniedError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/RateLimitError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: RateLimitError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/TypeSafeClient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: TypeSafeClient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/TypeSafeError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: TypeSafeError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/UnprocessableEntityError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: UnprocessableEntityError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_3" id="__nav_15_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaces
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interfaces
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/BoxCoordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: BoxCoordinates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/BoxQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: BoxQuestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/BoxResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: BoxResponse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ChoiceQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ChoiceQuestion&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ChoiceResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ChoiceResponse&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Logger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ModelCard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ModelCard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/NoulQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: NoulQuestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/NoulResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: NoulResponse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/RequestOptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: RequestOptions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/RetryPolicy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: RetryPolicy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ScoreQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ScoreQuestion&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ScoreResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ScoreResponse&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/SystemOneRequest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: SystemOneRequest&lt;Q&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/SystemOneResult/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: SystemOneResult&lt;Q&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/TextWithAssets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: TextWithAssets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/TypeSafeClientConfig/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: TypeSafeClientConfig
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/WithResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: WithResponse&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_4" id="__nav_15_3_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Aliases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Type Aliases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Asset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Asset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ChoiceCriteria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ChoiceCriteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Compression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Compression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ContentValue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ContentValue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/EntryType/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: EntryType
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/EnvVar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: EnvVar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Fetch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Fetch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/JsonValue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: JsonValue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/LogLevel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: LogLevel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Question/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Question
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ResultFor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ResultFor&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ScoreCriteria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ScoreCriteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ScoreLegend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ScoreLegend&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ScoreOf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ScoreOf&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/SentContent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: SentContent&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_5" id="__nav_15_3_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variables
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Variables
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/ENV/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: ENV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/LOG_LEVELS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: LOG_LEVELS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/noul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/score/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: score
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/VERSION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: VERSION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/withAssets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: withAssets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_6" id="__nav_15_3_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Functions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/functions/box/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function: box()
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/functions/choice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function: choice()
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/functions/image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function: image()
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        준비
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        문서: 서식이 사라진 팀 메모
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 끊긴 문장 이어 붙이기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 블록 분류
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        렌더링
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playground" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playground에서 열어 보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">구조 복원<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>서식이 사라진 일반 텍스트에서 Markdown을 요청 두 번으로 복원합니다. 첫 요청은 강제 줄바꿈으로 끊긴 줄을 다시 이어 붙이고, 두 번째 요청은 모든 블록을 제목, 목록, 코드, callout 등으로 분류합니다.</p>
+</blockquote>
+<p>이 cookbook(예제 모음)은 마크업이 모두 벗겨진 일반 텍스트를 받아 구조를 Markdown으로
+복원합니다. 입력 텍스트는 문장 중간에서 줄이 강제로 바뀌어 있고, 제목 표시도 목록 기호도
+없습니다. 복원 대상은 제목, 문단, 목록, 인용, 코드, callout(콜아웃: 강조 상자)입니다.
+예제로 쓰는 입력은 정확히 그런 상태가 된 팀 메모입니다.</p>
+<p>텍스트 생성 모델에 맡겨 Markdown으로 다시 쓰게 할 수도 있지만, 다시 쓰는 과정에서 단어가
+바뀔 수 있습니다. 여기서는 모델이 텍스트를 전혀 생성하지 않습니다. 모델은 문서에 대한 좁은
+질문(<em>이 줄은 문장 중간에서 이어지는가? 이 블록은 어떤 종류의 내용인가?</em>)에만 답하고,
+렌더링은 코드가 맡습니다. 그래서 출력의 모든 글자는 입력에서 그대로 오고, 모든 판단에는
+확률이 붙습니다.</p>
+<p>pipeline(파이프라인) 전체는 문서 하나당 API 요청 두 번이며, 순서대로 실행합니다.</p>
+<ul>
+<li><strong>1단계, 이어 붙이기:</strong> 인접한 두 줄마다 <code>Noul</code> 질문(예/아니요 질문이며, 답은 "예"가
+  맞을 확률입니다)을 하나씩 만들어, 줄바꿈이 한 문장을 두 줄로 갈라놓았는지 묻습니다. 모든
+  쌍을 요청 하나에 담아 보내고, 끊긴 문장을 이어받는 줄은 앞줄과 합쳐 블록으로 만듭니다.</li>
+<li><strong>2단계, 분류:</strong> 합쳐진 블록마다 <code>Choice</code> 질문(목록에서 선택지 하나를 고르며, 모든
+  선택지에 확률이 붙습니다)을 하나씩 만들어 제목, 문단, 목록 항목, 인용, 코드, callout(본문과
+  구분해 보여 주는 참고, 팁, 경고) 중 하나를 고릅니다. 블록은 1단계의 답이 나와야 생기므로
+  이 단계는 두 번째 요청이 됩니다. 이 요청에는 블록마다 딸린 동반 질문(제목 단계, 단계 순서,
+  callout 종류)도 함께 담기며, 그 답은 블록의 유형상 필요할 때만 읽습니다.</li>
+<li><strong>직접 확인할 수 있는 근거는 코드에서 처리합니다.</strong> 빈 줄과 명시적인 표시(<code>-</code>, <code>1.</code>, <code>#</code>)는
+  코드가 직접 읽고, 모델에 다시 판단해 달라고 보내지 않습니다. 이 메모에는 빈 줄은 남아
+  있지만 표시는 모두 사라졌습니다. 모델에는 코드가 텍스트만 보고 답할 수 없는 질문만
+  보냅니다.</li>
+</ul>
+<h2 id="_2">준비<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>ipython<span class="w"> </span><span class="s1">'cooksafe&gt;=0.3.0,&lt;0.4.0'</span>
+</code></pre></div>
+<p>그런 다음 <code>TYPESAFE_API_KEY</code>를 설정합니다.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">perf_counter</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cooksafe</span><span class="w"> </span><span class="kn">import</span> <span class="n">JsonCache</span><span class="p">,</span> <span class="n">make_playground_link</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typesafe_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Choice</span><span class="p">,</span> <span class="n">Noul</span><span class="p">,</span> <span class="n">NoulCriteria</span><span class="p">,</span> <span class="n">TypeSafeClient</span>
+
+<span class="n">TYPESAFE_MODEL</span> <span class="o">=</span> <span class="s2">"jev-1.14.0"</span>  <span class="c1"># 이 페이지에서 쓴 모델입니다. "jev-latest"로 바꾸면 최신 모델을 실시간으로 호출합니다</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">TypeSafeClient</span><span class="p">(</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"TYPESAFE_API_KEY"</span><span class="p">,</span> <span class="s2">"cache-only"</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">120.0</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">EXAMPLES_URL</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"https://raw.githubusercontent.com/typesafe-ai/typesafe-public-examples/main/"</span>
+    <span class="s2">"cookbooks/autoformat"</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Fetch one of this cookbook's files from typesafe-public-examples unless it is on disk."""</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">EXAMPLES_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span>
+
+
+<span class="n">CACHE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"autoformat_cache.json"</span><span class="p">)</span>
+<span class="c1"># True이면 공개된 답변으로 CACHE를 채우므로 실행 중에 요청을 보내지 않습니다. 실시간으로</span>
+<span class="c1"># 실행하려면 False로 바꾸고 CACHE를 삭제하세요. 디스크에 이미 있는 CACHE는 덮어쓰지 않습니다.</span>
+<span class="n">DOWNLOAD_CACHE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">if</span> <span class="n">DOWNLOAD_CACHE</span><span class="p">:</span>
+    <span class="n">download</span><span class="p">(</span><span class="n">CACHE</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">json_cache</span> <span class="o">=</span> <span class="n">JsonCache</span><span class="p">(</span><span class="n">CACHE</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="_3">문서: 서식이 사라진 팀 메모<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>테스트 문서는 빌드 시스템 마이그레이션을 알리는 메모이며, 일반 텍스트 수신함에 도착했을
+때의 상태 그대로입니다. 문단은 문장 중간에서 줄이 강제로 바뀌어 있고, 셸 명령은 아무 표시
+없이 한 줄에 놓여 있으며, 목록 두 개에는 기호도 번호도 없고, 경고문에는 경고임을 알리는
+표시가 없습니다.</p>
+<div class="highlight"><pre><span></span><code><span class="n">DOCUMENT_URL</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"https://raw.githubusercontent.com/typesafe-ai/typesafe-public-examples/main/cookbooks/autoformat/build-memo.txt"</span>
+<span class="p">)</span>
+
+
+<span class="nd">@json_cache</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fetch_document</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">"User-Agent"</span><span class="p">:</span> <span class="s2">"typesafe-cookbook/1.0"</span><span class="p">})</span>
+    <span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+
+<span class="n">RAW</span> <span class="o">=</span> <span class="n">fetch_document</span><span class="p">(</span><span class="n">DOCUMENT_URL</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">RAW</span><span class="p">[:</span><span class="mi">560</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Migration to the new build system
+
+Hi everyone, quick heads up about the build system migration that is
+happening next week. We have been running the new pipeline in shadow
+mode for three weeks and the results look solid, so it is time to
+make the switch for real.
+
+What changes for you
+
+The old make targets keep working until the end of the month. The new
+entrypoint is a single command that wraps everything, including the
+docs build that used to be separate.
+
+bun run build
+
+Generated artifacts no longer need to be committed. The new pipeline
+uploads them
+</code></pre></div>
+<p>줄 나누기, 빈 줄 추적, id 붙이기는 모두 요청을 보내기 전에 끝나며, 여기에는 모델이 관여하지
+않습니다. 각 줄에는 짧은 id(<code>L014|</code>)가 붙습니다. 모델은 이 id를 state(상태) 안의 평범한
+텍스트로 읽고, 질문과 답은 id로 줄을 가리킵니다.
+<a href="../semantic_find/">시맨틱 검색 cookbook</a>도
+같은 방식을 씁니다.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">to_lines</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="n">lines</span><span class="p">,</span> <span class="n">gap</span> <span class="o">=</span> <span class="p">[],</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">raw</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">):</span>
+        <span class="n">stripped</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[\t ]+"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">raw</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">stripped</span><span class="p">:</span>
+            <span class="n">gap</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>  <span class="c1"># 맨 앞의 빈 줄은 구분으로 치지 않습니다</span>
+            <span class="k">continue</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">stripped</span><span class="p">,</span> <span class="s2">"gap"</span><span class="p">:</span> <span class="n">gap</span><span class="p">})</span>
+        <span class="n">gap</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">lines</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tag</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">item</span><span class="p">[</span><span class="s1">'gap'</span><span class="p">]</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="si">}{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">i</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">line_id</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"L</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">"</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">block_id</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"B</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">"</span>
+
+
+<span class="n">LINES</span> <span class="o">=</span> <span class="n">to_lines</span><span class="p">(</span><span class="n">RAW</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">LINES</span><span class="p">)</span><span class="si">}</span><span class="s2"> non-blank lines. The model sees, e.g.:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tag</span><span class="p">(</span><span class="n">LINES</span><span class="p">,</span> <span class="s2">"L"</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">19</span><span class="p">:</span><span class="mi">24</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>28 non-blank lines. The model sees, e.g.:
+L013| The cutover touches three teams, so check whether you are on this
+L014| list before you plan anything for Monday:
+L015| The platform team
+L016| The web client team
+L017| Whoever still owns the release tooling
+</code></pre></div>
+<h2 id="1">1단계: 끊긴 문장 이어 붙이기<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>인접한 두 줄마다 Noul 질문을 하나씩 만들어 모두 요청 하나에 담습니다. 빈 줄로 나뉜 쌍은
+건너뜁니다. 질문은 일부러 좁게 잡았습니다("이 줄은 문장 중간에서 이어지는가?"). 이 정도면
+텍스트에 대한 객관적 사실에 가깝습니다. 질문에는 두 줄의 내용도 그대로 인용해 넣습니다.
+그래야 모델이 28줄 가운데서 id로 해당 줄을 찾지 않고, 문제가 되는 텍스트 자체를 보고
+판단합니다.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">join_question</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Noul</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Noul</span><span class="p">(</span>
+        <span class="n">instructions</span><span class="o">=</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">'Line </span><span class="si">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1"> is "</span><span class="si">{</span><span class="n">LINES</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">][</span><span class="s2">"text"</span><span class="p">]</span><span class="si">}</span><span class="s1">" and line </span><span class="si">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> is '</span>
+            <span class="sa">f</span><span class="s1">'"</span><span class="si">{</span><span class="n">LINES</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">"text"</span><span class="p">]</span><span class="si">}</span><span class="s1">". Does line </span><span class="si">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> pick up mid-sentence, continuing a '</span>
+            <span class="sa">f</span><span class="s2">"sentence left unfinished at the end of line </span><span class="si">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">?"</span>
+        <span class="p">),</span>
+        <span class="n">criteria</span><span class="o">=</span><span class="n">NoulCriteria</span><span class="p">(</span>
+            <span class="n">true</span><span class="o">=</span><span class="s2">"The line starts in the middle of a sentence that began on the previous line - the line break tore the sentence apart"</span><span class="p">,</span>
+            <span class="n">false</span><span class="o">=</span><span class="s2">"The line begins a new sentence, item, heading, or thought of its own"</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">as_json</span><span class="p">(</span><span class="n">questions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
+        <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">q</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"json"</span><span class="p">,</span> <span class="n">exclude_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">stitch_questions</span><span class="p">(</span><span class="n">make</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="n">make</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">LINES</span><span class="p">))</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">LINES</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">"gap"</span><span class="p">]}</span>
+
+
+<span class="nd">@json_cache</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">stitch</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">questions_json</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">started</span> <span class="o">=</span> <span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">system_one</span><span class="p">(</span>
+        <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">questions</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">questions_json</span><span class="p">),</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"joins"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">answers</span><span class="p">[</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">noul</span> <span class="k">if</span> <span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">answers</span> <span class="k">else</span> <span class="mf">0.0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">LINES</span><span class="p">))</span>
+        <span class="p">],</span>
+        <span class="s2">"seconds"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">started</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s2">"usage"</span><span class="p">:</span> <span class="p">[</span><span class="n">response</span><span class="o">.</span><span class="n">usage</span><span class="o">.</span><span class="n">input_tokens</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">usage</span><span class="o">.</span><span class="n">output_tokens</span><span class="p">],</span>
+    <span class="p">}</span>
+
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">stitch</span><span class="p">(</span>
+    <span class="n">tag</span><span class="p">(</span><span class="n">LINES</span><span class="p">,</span> <span class="s2">"L"</span><span class="p">),</span> <span class="n">as_json</span><span class="p">(</span><span class="n">stitch_questions</span><span class="p">(</span><span class="n">join_question</span><span class="p">)),</span> <span class="n">model</span><span class="o">=</span><span class="n">TYPESAFE_MODEL</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">LINES</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">l</span><span class="p">[</span><span class="s1">'gap'</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> pair questions, one request, "</span>
+      <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">'seconds'</span><span class="p">]</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>16 pair questions, one request, 0.24s
+</code></pre></div>
+<p>두 줄을 합치는 기준값은 앞줄이 어떻게 끝나는지에 따라 달라집니다. 앞줄이 끝맺지 않은
+줄(문장을 끝내는 문장 부호가 없는 줄)이면 이어짐 확률이 0.2 이상일 때 두 줄을 합칩니다.
+앞줄이 종결 문장 부호(<code>.</code> <code>!</code> <code>?</code> <code>:</code> <code>;</code>)로 끝나면 기준값이 0.5로 올라갑니다.</p>
+<div class="highlight"><pre><span></span><code><span class="n">JOIN_AFTER_DANGLING</span><span class="p">,</span> <span class="n">JOIN_AFTER_TERMINAL</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ends_terminal</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[.!?:;…]["</span><span class="se">\'</span><span class="s1">)\]]*$'</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="n">joins</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">LINES</span><span class="p">):</span>
+        <span class="n">bar</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">JOIN_AFTER_TERMINAL</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">and</span> <span class="n">ends_terminal</span><span class="p">(</span><span class="n">LINES</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="s2">"text"</span><span class="p">])</span>
+            <span class="k">else</span> <span class="n">JOIN_AFTER_DANGLING</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">blocks</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="p">[</span><span class="s2">"gap"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">joins</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">bar</span><span class="p">:</span>
+            <span class="n">blocks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">"text"</span><span class="p">]</span> <span class="o">+=</span> <span class="s2">" "</span> <span class="o">+</span> <span class="n">line</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span>
+            <span class="n">blocks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">"lines"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">line</span><span class="p">[</span><span class="s2">"text"</span><span class="p">],</span> <span class="s2">"lines"</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">"gap"</span><span class="p">:</span> <span class="n">line</span><span class="p">[</span><span class="s2">"gap"</span><span class="p">]})</span>
+    <span class="k">return</span> <span class="n">blocks</span>
+
+
+<span class="n">blocks</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">"joins"</span><span class="p">])</span>
+<span class="n">healed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">LINES</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">LINES</span><span class="p">)</span><span class="si">}</span><span class="s2"> lines -&gt; </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span><span class="si">}</span><span class="s2"> blocks (</span><span class="si">{</span><span class="n">healed</span><span class="si">}</span><span class="s2"> line breaks healed)"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">block</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">blocks</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">[</span><span class="s2">"lines"</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">block_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> line</span><span class="si">{</span><span class="s1">'s'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">' '</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">block</span><span class="p">[</span><span class="s1">'text'</span><span class="p">][:</span><span class="mi">62</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>28 lines -&gt; 17 blocks (11 line breaks healed)
+B000  1 line   Migration to the new build system
+B001  4 lines  Hi everyone, quick heads up about the build system migration t
+B002  1 line   What changes for you
+B003  3 lines  The old make targets keep working until the end of the month. 
+B004  1 line   bun run build
+B005  3 lines  Generated artifacts no longer need to be committed. The new pi
+B006  2 lines  The cutover touches three teams, so check whether you are on t
+B007  1 line   The platform team
+B008  1 line   The web client team
+B009  1 line   Whoever still owns the release tooling
+B010  1 line   Things to do before Monday
+B011  1 line   Update your local toolchain to version 2.4 or later
+B012  1 line   Delete the old build cache directory
+B013  1 line   Run the doctor script and fix anything it flags
+B014  3 lines  If the doctor script reports a red result on the toolchain che
+B015  2 lines  As Dana put it in the kickoff, "a migration nobody notices is 
+B016  1 line   Thanks, and shout if anything looks off.
+</code></pre></div>
+<h2 id="2">2단계: 블록 분류<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>이어 붙인 블록마다 <code>Choice</code> 질문을 하나씩 던집니다. <em>이 블록은 어떤 종류의 내용인가?</em> 아래
+dict 세 개와, 뒤에 나오는 <code>classify_questions</code> 안에 있는 단계 질문의 true/false
+criteria(판단 기준)가 분류기 명세의 전부입니다. 이 pipeline을 여러분의 문서에 맞추려면 이
+설명문을 고치면 됩니다.</p>
+<div class="highlight"><pre><span></span><code><span class="n">TYPE_CRITERIA</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"heading"</span><span class="p">:</span> <span class="s2">"A short label or title that names the document or the section that follows it - not a full sentence of content"</span><span class="p">,</span>
+    <span class="s2">"paragraph"</span><span class="p">:</span> <span class="s2">"Running prose: one or more complete sentences of explanatory or narrative text"</span><span class="p">,</span>
+    <span class="s2">"list_item"</span><span class="p">:</span> <span class="s2">"One entry in a list of parallel items - an ingredient, a feature, a task, an attendee; reads as one of several sibling entries"</span><span class="p">,</span>
+    <span class="s2">"quote"</span><span class="p">:</span> <span class="s2">"Words attributed to a person or source - quoted speech, a citation, an excerpt someone else wrote"</span><span class="p">,</span>
+    <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"Computer code, a shell command, terminal output, or a config snippet meant to be read verbatim"</span><span class="p">,</span>
+    <span class="s2">"callout"</span><span class="p">:</span> <span class="s2">"A warning, tip, or important note that interrupts the flow to flag something the reader must not miss"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">HLEVEL_CRITERIA</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"The title of the whole document"</span><span class="p">,</span>
+    <span class="s2">"section"</span><span class="p">:</span> <span class="s2">"A major section heading within the document"</span><span class="p">,</span>
+    <span class="s2">"subsection"</span><span class="p">:</span> <span class="s2">"A minor heading nested under a section"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">CALLOUT_CRITERIA</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"Neutral extra information the reader should be aware of"</span><span class="p">,</span>
+    <span class="s2">"tip"</span><span class="p">:</span> <span class="s2">"A helpful suggestion or shortcut that makes things easier"</span><span class="p">,</span>
+    <span class="s2">"warning"</span><span class="p">:</span> <span class="s2">"A caution about something that can go wrong or cause harm"</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>유형이 <code>heading</code>으로 나오면 렌더러는 제목 단계를 알아야 하고, <code>list_item</code>이면 순서가
+중요한지, <code>callout</code>이면 어떤 종류인지 알아야 합니다. 하지만 유형은 아직 알 수 없고, 유형이
+나올 때까지 기다리면 왕복이 한 번 더 생깁니다. 그래서 동반 질문을 같은 요청에 미리 담아
+보냅니다. 이 답의 대부분은 끝내 읽지 않습니다. 예를 들어 문단의 단계 확률은 쓰이지
+않습니다. 질문을 하나 더 넣어도 늘어나는 비용은 작습니다. token(토큰)의 대부분은 state가
+차지하고 state는 어차피 한 번만 보내기 때문입니다. 반면 왕복이 한 번 늘면 요청 하나만큼의
+지연 시간이 고스란히 더해집니다.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HEADING_MAX_CHARS</span> <span class="o">=</span> <span class="mi">90</span>  <span class="c1"># 이보다 긴 블록은 제목으로 렌더링할 수 없으므로 묻지 않습니다</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">classify_questions</span><span class="p">(</span><span class="n">texts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">texts</span><span class="p">):</span>
+        <span class="n">bid</span> <span class="o">=</span> <span class="n">block_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">questions</span><span class="p">[</span><span class="sa">f</span><span class="s2">"type_</span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">Choice</span><span class="p">(</span>
+            <span class="n">instructions</span><span class="o">=</span><span class="sa">f</span><span class="s2">"What kind of content is block </span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">?"</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="n">TYPE_CRITERIA</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">HEADING_MAX_CHARS</span><span class="p">:</span>
+            <span class="n">questions</span><span class="p">[</span><span class="sa">f</span><span class="s2">"hlevel_</span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">Choice</span><span class="p">(</span>
+                <span class="n">instructions</span><span class="o">=</span><span class="sa">f</span><span class="s2">"As a heading, what level would block </span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2"> occupy in this document's structure?"</span><span class="p">,</span>
+                <span class="n">criteria</span><span class="o">=</span><span class="n">HLEVEL_CRITERIA</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">questions</span><span class="p">[</span><span class="sa">f</span><span class="s2">"step_</span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">Noul</span><span class="p">(</span>
+            <span class="n">instructions</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Is block </span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2"> an instruction in a sequence where the order of the items matters?"</span><span class="p">,</span>
+            <span class="n">criteria</span><span class="o">=</span><span class="n">NoulCriteria</span><span class="p">(</span>
+                <span class="n">true</span><span class="o">=</span><span class="s2">"It is one step of a procedure - the items around it must happen in order"</span><span class="p">,</span>
+                <span class="n">false</span><span class="o">=</span><span class="s2">"Order is irrelevant - it is a loose collection, or not a list item at all"</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">questions</span><span class="p">[</span><span class="sa">f</span><span class="s2">"callout_</span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">Choice</span><span class="p">(</span>
+            <span class="n">instructions</span><span class="o">=</span><span class="sa">f</span><span class="s2">"What kind of aside is block </span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">?"</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="n">CALLOUT_CRITERIA</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">questions</span>
+
+
+<span class="nd">@json_cache</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">classify</span><span class="p">(</span><span class="n">texts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">gaps</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">questions_json</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">tagged</span> <span class="o">=</span> <span class="n">tag</span><span class="p">([{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span> <span class="s2">"gap"</span><span class="p">:</span> <span class="n">g</span><span class="p">}</span> <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)],</span> <span class="s2">"B"</span><span class="p">)</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">questions_json</span><span class="p">)</span>
+    <span class="n">started</span> <span class="o">=</span> <span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">system_one</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">tagged</span><span class="p">,</span> <span class="n">questions</span><span class="o">=</span><span class="n">questions</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+    <span class="n">judgments</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">)):</span>
+        <span class="n">bid</span> <span class="o">=</span> <span class="n">block_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">type_answer</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">answers</span><span class="p">[</span><span class="sa">f</span><span class="s2">"type_</span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span>
+        <span class="n">hlevel</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">answers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">"hlevel_</span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">judgments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">"type"</span><span class="p">:</span> <span class="n">type_answer</span><span class="o">.</span><span class="n">choice</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">type_answer</span><span class="o">.</span><span class="n">confidence</span><span class="p">,</span>
+                <span class="s2">"probabilities"</span><span class="p">:</span> <span class="n">type_answer</span><span class="o">.</span><span class="n">probabilities</span><span class="p">,</span>
+                <span class="s2">"hlevel"</span><span class="p">:</span> <span class="n">hlevel</span><span class="o">.</span><span class="n">choice</span> <span class="k">if</span> <span class="n">hlevel</span> <span class="k">else</span> <span class="s2">"section"</span><span class="p">,</span>
+                <span class="s2">"step"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">answers</span><span class="p">[</span><span class="sa">f</span><span class="s2">"step_</span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span><span class="o">.</span><span class="n">noul</span><span class="p">,</span>
+                <span class="s2">"callout"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">answers</span><span class="p">[</span><span class="sa">f</span><span class="s2">"callout_</span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span><span class="o">.</span><span class="n">choice</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"judgments"</span><span class="p">:</span> <span class="n">judgments</span><span class="p">,</span>
+        <span class="s2">"n_questions"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">),</span>
+        <span class="s2">"seconds"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">started</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s2">"usage"</span><span class="p">:</span> <span class="p">[</span><span class="n">response</span><span class="o">.</span><span class="n">usage</span><span class="o">.</span><span class="n">input_tokens</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">usage</span><span class="o">.</span><span class="n">output_tokens</span><span class="p">],</span>
+    <span class="p">}</span>
+
+
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">]</span>
+<span class="n">classified</span> <span class="o">=</span> <span class="n">classify</span><span class="p">(</span>
+    <span class="n">texts</span><span class="p">,</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="s2">"gap"</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">],</span> <span class="n">as_json</span><span class="p">(</span><span class="n">classify_questions</span><span class="p">(</span><span class="n">texts</span><span class="p">)),</span> <span class="n">model</span><span class="o">=</span><span class="n">TYPESAFE_MODEL</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">block</span><span class="p">,</span> <span class="n">judgment</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="n">classified</span><span class="p">[</span><span class="s2">"judgments"</span><span class="p">]):</span>
+    <span class="n">block</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">judgment</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">classified</span><span class="p">[</span><span class="s1">'n_questions'</span><span class="p">]</span><span class="si">}</span><span class="s2"> questions about </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span><span class="si">}</span><span class="s2"> blocks, one request, "</span>
+      <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">classified</span><span class="p">[</span><span class="s1">'seconds'</span><span class="p">]</span><span class="si">}</span><span class="s2">s</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'block'</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}{</span><span class="s1">'type'</span><span class="si">:</span><span class="s2">&lt;11</span><span class="si">}{</span><span class="s1">'conf'</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}{</span><span class="s1">'companion used'</span><span class="si">:</span><span class="s2">&lt;18</span><span class="si">}</span><span class="s2">text"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">blocks</span><span class="p">):</span>
+    <span class="n">companion</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"heading"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"level=</span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'hlevel'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s2">"list_item"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"step=</span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'step'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s2">"callout"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"kind=</span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'callout'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="s2">"type"</span><span class="p">],</span> <span class="s2">"-"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">block_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}{</span><span class="n">b</span><span class="p">[</span><span class="s1">'type'</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;11</span><span class="si">}{</span><span class="n">b</span><span class="p">[</span><span class="s1">'confidence'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">companion</span><span class="si">:</span><span class="s2">&lt;18</span><span class="si">}</span><span class="s2">"</span>
+          <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'text'</span><span class="p">][:</span><span class="mi">46</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>62 questions about 17 blocks, one request, 0.22s
+
+block type       conf  companion used    text
+B000  heading    0.98  level=title       Migration to the new build system
+B001  paragraph  0.89  -                 Hi everyone, quick heads up about the build sy
+B002  heading    1.00  level=section     What changes for you
+B003  paragraph  1.00  -                 The old make targets keep working until the en
+B004  code       1.00  -                 bun run build
+B005  paragraph  0.92  -                 Generated artifacts no longer need to be commi
+B006  paragraph  0.65  -                 The cutover touches three teams, so check whet
+B007  list_item  1.00  step=0.07         The platform team
+B008  list_item  1.00  step=0.08         The web client team
+B009  list_item  1.00  step=0.08         Whoever still owns the release tooling
+B010  heading    1.00  level=section     Things to do before Monday
+B011  list_item  1.00  step=0.56         Update your local toolchain to version 2.4 or 
+B012  list_item  1.00  step=0.55         Delete the old build cache directory
+B013  list_item  1.00  step=0.68         Run the doctor script and fix anything it flag
+B014  callout    0.84  kind=warning      If the doctor script reports a red result on t
+B015  quote      0.99  -                 As Dana put it in the kickoff, "a migration no
+B016  paragraph  0.99  -                 Thanks, and shout if anything looks off.
+</code></pre></div>
+<p>companion 열을 보면 미리 받아 둔 답이 어떻게 쓰였는지 알 수 있습니다. "Things to do before
+Monday" 아래 세 줄은 단계 확률이 0.55에서 0.68이므로 번호 목록으로 렌더링되고, 팀 이름 세
+줄은 0.07에서 0.08이므로 글머리 기호 목록이 됩니다. 그리고 doctor 스크립트에 관한 세 줄짜리
+경고인 B014는 <code>warning</code> 종류의 callout으로 분류되었습니다.</p>
+<h2 id="_4">렌더링<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>코드가 이 판단들을 모아 페이지를 조립합니다. 연속된 목록 항목은 목록 하나로 묶고, 항목들의
+단계 확률 평균이 0.5 이상이면 번호를 붙입니다. 이 threshold(임계값)는 묶음 전체에 대한
+결정이며, 어느 질문도 이것을 직접 묻지는 않았습니다.</p>
+<div class="highlight"><pre><span></span><code><span class="n">STEP_THRESHOLD</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">HEADING_MARK</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"#"</span><span class="p">,</span> <span class="s2">"section"</span><span class="p">:</span> <span class="s2">"##"</span><span class="p">,</span> <span class="s2">"subsection"</span><span class="p">:</span> <span class="s2">"###"</span><span class="p">}</span>
+<span class="n">CALLOUT_MARK</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"note"</span><span class="p">:</span> <span class="s2">"NOTE"</span><span class="p">,</span> <span class="s2">"tip"</span><span class="p">:</span> <span class="s2">"TIP"</span><span class="p">,</span> <span class="s2">"warning"</span><span class="p">:</span> <span class="s2">"WARNING"</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">to_markdown</span><span class="p">(</span><span class="n">blocks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"list_item"</span><span class="p">,</span> <span class="s2">"code"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">groups</span> <span class="ow">and</span> <span class="n">groups</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]:</span>
+            <span class="n">groups</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">b</span><span class="p">[</span><span class="s2">"type"</span><span class="p">],</span> <span class="p">[</span><span class="n">b</span><span class="p">]))</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">kind</span><span class="p">,</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"list_item"</span><span class="p">:</span>
+            <span class="n">ordered</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="s2">"step"</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">items</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">STEP_THRESHOLD</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">ordered</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"- </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+                <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+            <span class="p">))</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"code"</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"```</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">items</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">```"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"heading"</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">HEADING_MARK</span><span class="p">[</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'hlevel'</span><span class="p">]]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'text'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"quote"</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&gt; </span><span class="si">{</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'text'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"callout"</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&gt; [!</span><span class="si">{</span><span class="n">CALLOUT_MARK</span><span class="p">[</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'callout'</span><span class="p">]]</span><span class="si">}</span><span class="s2">]</span><span class="se">\n</span><span class="s2">&gt; </span><span class="si">{</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'text'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"text"</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
+
+
+<span class="n">markdown</span> <span class="o">=</span> <span class="n">to_markdown</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">markdown</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code># Migration to the new build system
+
+Hi everyone, quick heads up about the build system migration that is happening next week. We have been running the new pipeline in shadow mode for three weeks and the results look solid, so it is time to make the switch for real.
+
+## What changes for you
+
+The old make targets keep working until the end of the month. The new entrypoint is a single command that wraps everything, including the docs build that used to be separate.
+
+```
+bun run build
+```
+
+Generated artifacts no longer need to be committed. The new pipeline uploads them to the registry automatically, and checking them in just creates merge conflicts.
+
+The cutover touches three teams, so check whether you are on this list before you plan anything for Monday:
+
+- The platform team
+- The web client team
+- Whoever still owns the release tooling
+
+## Things to do before Monday
+
+1. Update your local toolchain to version 2.4 or later
+2. Delete the old build cache directory
+3. Run the doctor script and fix anything it flags
+
+&gt; [!WARNING]
+&gt; If the doctor script reports a red result on the toolchain check, do not proceed with the migration. Ping the infra channel first and we will sort it out together.
+
+&gt; As Dana put it in the kickoff, "a migration nobody notices is the only kind worth shipping."
+
+Thanks, and shout if anything looks off.
+</code></pre></div>
+<p>위 출력의 모든 단어는 입력에서 왔습니다. pipeline이 정한 것은 경계, 유형, 마크업뿐입니다.</p>
+<h2 id="playground">Playground에서 열어 보기<a class="headerlink" href="#playground" title="Permanent link">&para;</a></h2>
+<p>이 공유 링크에는 이어 붙인 블록과 2단계 질문 전체가 들어 있습니다. 링크를 열면 분류를
+실시간으로 다시 실행해 볼 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><span class="n">playground_link</span> <span class="o">=</span> <span class="n">make_playground_link</span><span class="p">(</span>
+    <span class="n">tag</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">),</span>
+    <span class="n">classify_questions</span><span class="p">([</span><span class="n">b</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">]),</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">"🔗 [Open the stitched memo + questions in the TypeSafe playground](</span><span class="si">{</span><span class="n">playground_link</span><span class="si">}</span><span class="s2">)"</span><span class="p">))</span>
+</code></pre></div>
+<p><a href="https://console.typesafe.ai/playground#share/N4IgJg9gxgrgtgUwHYBcAqCAeKQC4AEIAQgAxkA++AsgJYDmATgIYo0RL4oScAWC+SBAHd8AIxg0ANmHwBnAJ6yUCOAB0k60iQCMlABI18CAG4IG89ggA0+AI4SoAa3x8mYWfhgAHfE1EQYFF5+cSkZBSUVfDh6ZlZ2XhZ8Gg8eJi8vZBokOgEsIKEEBEcAOnwAdX400zEijgYYJCRs3JQ+PJEvGkzJbP5suTTIETgIMH4AMwgGXgYi-ELijyYkGTb+OdkYSRQPSQgIZ1kIXrAbY+SglM4aRE5uOCZHfnW5IRoUKB58KZm5pkkJXUmjIACZKOU0kEvis6AgPL98BYYMCkFoAMyUNDtE4yR7PThMBhw3b4Z4IHxCaaOFqeVBSYJGVb4CATRmjVA8MrY-iCETIFDmLwQbJXZZyFqSfhQCBwR7MtpJITMLweExmeRtFo2bJQSQwMC016QKAeULSRJBGCyBBrbiifg2rxElgIIEaNFkAAslHE9UaYgk0lRWgArJQAOLIMyumRE1gTJhQUlIbj7HJmPK2+61fAyuUfZRgbntPn4Lo9PqeLz7NwedZwHOvOZ0FKC+S+QKylg0KAAyTyGwrGRfBBOI18RsDABW1uh-2UHkQxOl7AmvWTsndIJIADYse1YFxTDMuDBR-WeHMXggmHBZOduKOnAs+OsZsjfHMWRwtXs27Uvz8J+NYrL4SCajwtKIlQ7BgEw8i4DuADsB78KBKC-I2yh3juAAcaELAgoh5r0AqcLeaieiQACcEI8BA6ozEoUiSCyQhIJeGwIFKTA2vcJwtCGOgkAeLT1twkCAdM-CwasCHCdouj4AAql48HKEiAQzPsfZsVwJwwgMXD4CeshsBwoIlF6LI6a6DAgto4L4AAIjxCCaa8uKBmEeZJu0hpzMm0zyI5mL4AASgGxrQFwzFQAw3RBMOPw0Jg4GQbSHw-JITB0LIik+vgACSbIxcF8WJV4QRzMKDCkkw+BzDImzbEECSvAZkhGRwz6ODYUmpkEXgMNARQyO8bTsrEPbsGUAAKE79EgEzMHmaRNDxqUMEo4ETfw7ySGxxz1ZcLKBPcJJ8Aw26eto4b4AAgh4LkrI1XgXdlxntDSTishMNiqCAjUxIws0cKm-hgB2Q29vCyRcT+A5ktkE3TFNshQRkLRAiAin7vg2IrI4D57YMARXGyKyZTk+D7IcHj-SUIA2CAI2ytVsgYNgeCEMAQMoPImQAPpaCQQMEPzICC5kEv4EDXwilACBA4DIDZEoDTJhZBW80DkJJDSzKsnm7DKKgCNiLpzhiwA-Kr8sgAlHxmDQTBy1LriGjkctA495OnblDpsdMNwoFKloCHe8PlfA5Gh68Nrax1UI-Cc+xCB42UALQCBAyU-Nsx0CsgyssmyMqoAKDtA86zBg14PC+yAUVNLS7M2gQli2dEMmm3ANYeY6JdIMrjNslgoFICwIU99PDBxDQNTKNgNcgL0SjCy7ah6yAADyghMu2yQcI1G-tWydf9lt28eLnYEtM1NACkOPy3igMBzK-KB8f14G+Cgc24wEAAG4mq3ncL4Rmh8TY2hPACCUohei0wFIleEa97D5xVrvco0xIEsEFDQcQRYczvTMMcDgodjifzLrnTBJDZCZDHDwV+UAPjgyHBwLAysGDVTkLKBA3ceL8WVFgteMpxjNwAMIc0CJmCR1hfCDB4mxfM8ozgUQYDEaeIdAgfRQDYUOjVK4THoHIZoGQPLRFvBbEyDpwFuFMmYUQPYd5qz0vsQIzd-ZCCJM0HINhWBeEMTMW4dUf4WyGi8VOoozANE5oydcEARAmXXHlfhiAtS02bBAzMcA5x5yCDEWQusAC+pS1Y8ClKYSQosyDi15lLGW2CCAKwYnDNeGtBTnniJxbx4ovbalfEkapW0qTbBkEg6ANt6ksigLALwHZvrXBNHHVAAByDwmsemfwQPbFmjtnbKESu7RpAsPhSmbjyMOEcTavCEAxCOqzECoDXknXp3johMGnFQscvSXAQNpJNKCv4ArQDWSgN5MBRDvIsp87RodBm00EJEGQjRxgzEarC9gQNylq0iF4OpZAPYCyFi0x2qZtidM4t05OfTd7FTNNbfAYt-5dK1v8gYWKED2FLgda60T+B4MzHc9ot8vmAPIfs9xiVjluxJdLBo5KgbFTFD+R0ygfAm3eqNZWYBdn4Fzq8cVRIAjMmyvk3aaRLEcAGMKhyBygaJkkDaZue8GAYstjQBe7ljArCCLnL64p6b8RlEdP5FkQmFKUefS4UQkj9lxRUw5-YKZEoaZLUlstd6Kw6Y69WNKOU62bgbIIRsZDavMuMS2UyXx23EbK12pzM0gCic3AAcggQIzA2L5DWtkLC4NGT-E9ZjAIFp7FMF8d+Vka8gmfL4JILwExthyBgHQOELEEhUIYvVI8kd8QxxBflIwfFn4OrVtO-xdBPl9kCBZXw-gLrHEyceyOfYOB0G4KI2moc738TSFopNatmlEu0Aq5pzdc3K2pdsulutWkgFLSjY2FczbkWuLWmZOhpWHMbSchVSKb2739mOwOfgtoJwudEpI09ECI2efHU87RsWgqSFMI6ySs4BujY1FdR05AjzLibSu5tIX5qvg3Juu9W7XvLKNTu6qe6jG-PmQemkbRV1HvDE2k9crTzih2UO89F7L3yGvc+W9lA70QwffgqClmnzpgBE2V9w1sXFffW1OQn4vyURMd+uzv6-04QAoBRQwEjuWNAoVbI4ExmOkQ5BuRUHP11mrehyqkN4OWIAxKxDswmTITtbdzFtK0LsDALB4QmFfFYew3poXuFmD4S+wRh9hEHVGsocRYwssyIHnImYCjX6YxUf3dRgSzDaIQRTfRUbjFrjMbICxmQik2KCHY7ijiTwuNYG4lNnGvEkYWH4oZQSo1hPRv6wpNGrhVwXt4UkrwkkpO4Gk3IbWsmtHaCOvJBShrRBSGU5NQMCVgYg2S5ulLJCwdpb0hDjtGVW2mSysg2g2WFp6Q+rlgneXadfGYQVtlPWiv6NZpcBCpUNpdgRs5iqYBZdVZbbuBLy5KPZnqg1RqxUU6-GamQFqCnWsyN5knZg17Otdbvd1nrrjermNUm7ga1VnwOKG9OEb2BRsB2fAC28AG+COsBw7niUAQ-p5BnN7SYP5vZdj9giP9ap3Lezs91bMPMq0NoXDCt8Pyvp223enbu0IL7Y1Ad0xHj-JyW4TMY6Jm5inUSWLc7ugLp4su1dWwN3wn+Tu9G+7FRFKeEe8Sp7zIS-zVeoSJ273-L8BTDJHk33F78p+79o1f3DaYNaKoRId54sdqBrQoJIfZsQ9B7Bat7fwZLS71G7PRMYaZaj0fvunb++bfgT2gKfYnbI0EIOlHTzUcjnRo9-BGMWwTixrXbGggcYztxw1vHC4Cc0+bYTaGtPibVpJlUaTRDWTduBTBALuGBGYFTVcAeKUDTITHTCeTAKeGecwOeIkUzG8VefNSzbeN1DrVANA3HWNVzF0dzONe8V-B+HzW0Z+VAV+ALFgILJRH+WQP+MCKnVYCLBxfBGLdneLHtRBZLI+NBdLR2TLEtHLMLfLORO0DnchUrfhGhfgOhKrBhWrFhJRNhH+Rrf+ZrXhIINrIRF1LrMRfNBRaRWRY5U2cYUbRdVRWUSbTRGbXRFAebHuRbFaZbVbKxRAG7LbHgpxBgPbW4cRVNY7RDHxM7AJG4YJHuK7eqG7KJSOWJR7BJF7DOHMD7Zvb7YdXJKAgHfOIHEpE3IGKpdUWpUfcfLLKfOHItR3fpJRIjGwB5EZCohYcdSZL3MEOZBZRzXgFZcFF5FATZOQeHXZDfI5JtCDajK5doVgcOWLRkB5E4K-IY6ufNVjeFb5X5OlAFNwIFD4EFRka-P-R2LYGFe-eFbIRFPfXIFFEhdFTMblOlUokAcHKoy3KHXeGHOoh3elRDZHLDNHEgUETHODTlJzG0fHMuB5InRke1dnY1PnaPY5WQSYrfCDJVZuZna4VnTVN3eTMafVb8HncnFQZYUadFM6S1IIEXZAE+cXC9R2KXLLWXTMeXH1JXC2FXS2NXCADXcNOlHXIovXXaA3BNY3EAIfBWcI83T4ltK3SfG3afR2WfBHefQ2RfStGgD3VfOtMEDE2nAPFtIPRDEPQUMPbAftFaKPIdWPUdBiRPSdadVPfNedE7RdLPY6ddTdfPZiXdT4C6NvQ9S8cvW8SvZkoGGvffSIvye9BIRvZ9ARXItvD9fAL9BYLvXIP9XvADAfN4kfMgdEaoqDFUv4ufHBBfVDU2X-GtbokgdEI0uVbfXfA42Mx2UjQMumCjEOU-RY8-aOBjdYm-ZjYePYtvJ-LjM6XOXXd-YuLTb-WssTNeAA9IIAx2EA2mDucApTUOaA-udTYeRcxAowZA-TVAozGYEzHsMzbAtWXA6zfA+zQg-osUi+csMgqUDzPnLzE+RgWgvzPjQLL+FgkLf+Tg4BSLCBaLPcuLJiBBcyJBWkVLdBfNCQnBKQghGQkhIrcsBQyhMrZQ1-TLGrIoOrLQhrSNPQzAHhVrARYwkRbrVUhWPrSwwbawkbJRMbATNRYcKbLRbIWbPRQIBbWs0xT7Hw9bfw+0bbGQXbVxMIo7cTOMmMugQJboS7Aea7SJLBFIh7eJZ7doV7LI3KT7FM1vX7fI6IQoopYHN4j44s0sn48dCsjUhlfU7DdEcE+HHHKEnlRnAnOE78LyD1EVMqXnCkiVNE5s6Yy3bEhlNVfEikQkznW0bnRkE1Kk81IpYXdIUXRk+1SXAEaXWzMK0JLOLkkwZXM6a4fkwUqUYUueUU5zcU6zQ3RNaU0HJ2OUolEsr4ifQ5csu3LHSsxDZDV3HUvUlHA0xs2KunU0sw80rtS03ta0iPW0rRe0qyuPAMzopPV08uNPLwDPJdfjNdXPLdQigOIMzbVOUMgYnINUM9KvS9aI4jOM+vB9JMwwiyicJIdMzMn9HMnvPvFwAsrqkDMlIlL0Zy5UpWFigtCE4tKsrUms5fC2T3Nfb0eak0nfMou4z5Q-Hs4OHuBYiONvC-Yc2AYYsmu-Cc1OKczOGct-fjBcr-JYjGs42uF0KTZuLc3IHciAoVKAvuNTOA48jm8eM8lAwzdAheW8rA7m9eNsKzFQZ8kQt81qj8tzb8igu+THACw0ICt+Jg0CxqVg9g0+SVLg0BHg2C7uWBBCxLZClBQgtLDBNQrLXBD1XLQhArOQ4rChHuahBgCrUiuQDQ+rHQ6isCfQ+ixARi0wnrcwti3eAbfReRPrOw8bPi1YASlw86Nw0Sjw8S7w7oNbaxGS3MEdIIkIg7WU5Sz5NSjSuI0OBIiJIIZItvVIwyxGEy1JMynIyyuS-7XaQHYpEHSpUZSo70OGoahGtylGyIgZO4lo1OGejo50hsmyaAPoxkv8fAU40YiEiYmnFsmYxYuYl4M-MnV8VYo+kc5WrYk7R4H5Zie-fY72XIYFb6NYmmjY-FaFF+uMhFGYIjPIVFOkT1F4j5SG84zVGG+eoGX4ka5Ghojyma7DGyag9BsXblGE-leE0K0nCK8kyg1E6ncwzE+KxnHEpKw+NnbVIkrnUkzKvnU1akoXK1fKhku1cq4qkwt1cqr1Kqv1Hk2q4NdXVcIU3Q4zFq2NCU5KKUmUnq5SpBgamo4amfUa9y8a6sitKmKtfoTykEr0XG1slBpax2C0wQ8PE+QdGPHax0-al0lPI6909PT0zPc6nPP0h9AvPdYM+60vMMp6ivc9NeNS29XvBvJ9X619f66EMCIG7Mnuf9fvIDeBrNBAIlUMZBp2bRtU3R5ex2Ca7Un-MTes7GkgUMCxwjQmg-bs4-Psm5O7KOejE4p+um8cpx9jdOacnOVmouQTE8pfdDV5CTXmwA-mxoOTIWvc0W1TDmCW0ZqW9nPTN6OW4zDAxWiie8x2R89WmXAg4+YglzS+L8m+X8w23zeg-zECxRC28Cjgm2qC+2qBOCwTeBF24Q1CsQoGDC8arCvLIhWQ0hfCkra60O8Or2si5haOjhGiuihJ9rezEwrMsw9xNOxDDOobGwp55RXixw-i5woS1w9woxMuySiu3wjbHMexWuhS-bJSs3Zu961urS8JJIvSnugyp7fuzIwe9JL7EengseruooyehyxBsMAp1BnRvBp3EAIEhs0MHy+o-BvHQK2EgVBEkRu+8VShnaep2hpnBhjVFK5htKkklQ9hqKzhnKmynhm1QqgR-NVk4RuXSqxXaqiRoNGNaR02WR6i+RguRR9qyU2HbJtRs3PJgp2otB3yjB-RtGwxqBXUkxrBkEup8+uKxalO5a0PNay0hxu0px0eva50-gZPGdCYY60670i6-xxQw-IvEJ54MJk9CMyJ6vd6mJhM0+eJ4epJ9vDMzvdgEG+M-MrJ1RosvcBNopoGdU0p53NN8ZusrG2a3cU1ltIjIm5p3ssms-SmocrpgB0cxkVjSOJml-WclqtmtZvlDdlcqZ+uGZmTOZ0AgU3cx2pZmAo8p97TaWzZgzWeHZhW1gO85Wo5mzR2OzTWxk989nXW65qKv8x+QC+54Cs2wly20LSC7gqLT5x2+Cn5oQlC92tCjLL2yQ326QsF3C7gIO1t8rO1iOxhcizQ4xKi7XZFlrVFpOzFlO7FyRdOqwrO2w7i+wibUl45QuubEuqlkxcuyxaS2xWSwI5l0I8wuU9lhga9Tl+I7SxI3SzyGJfl9I4yoV97Ie0VpacVgo8eqV+ymNxyhdzR6HVypNzV5V1Vmp3cDV-4pD7V594K4nREw1lEqnE1vNha-Ghnc1lnRhgk613VdKth5Eh17KwXXKl1gq-hjFQR0q+DkRzk318RnjAN+qmRxquR68hR-XSN5R6N1RjxNNLQXcRdxenz-45V8pms93LN4Ezr3dhLs0mxlaux9astraitxz8mat3wQ62dTxk67xs67PX0vPAJvaoJu6pIB677Z6yMqJ-tuvWJ764d+z7JVOQGid7vadzJwfbq+d5CbrvNRV5NgEspgxl9lfbNrQZCMbts7+g99GEmk-Npwczp2OWm2-Xph9ScgZ5moZucx9z-Z9kTCZ5WtcxuWZtubcsA4W5TMWlZoeIDseDZ88rZ8D683ZqDpWizVWvAk5l8s5pzEgy5ntPWzzW5rDgxB53D4LNggjt5ojmCkjmBMjhLCjt2whaj8Q2jzC+j7CxjwrZjyF4OqhNjkiuFyOrjxF3QuO2igT5vIT0RETw5HFx2PFzi7O6T3Okl-OslnRIuylzFal8xWl9TzbTTpl5xRS3Tpuk7Fu2IrlnSyV8zpIXugVxJGznKEVv627yt51qP4oqex2compIld7zz63Hrr73zxoxqZo4ZI-do8ZCdBs5CXo7wfow+4+rZcYuYEH85K+3ea5cmpY+5R5f+iFN5K41+nYj+vYiB3+0Ffv4YqFS4141+m48Bu4yBx4rgz3l+1R9zvPxU74xDBV4ppVnE0xoHoLvY3HaEnVohkKnEA1sh-W6KqhmVY0yxxL+h5Ly1rVKmFhjLu1rLygx13LtPuDVdaFdXqLJEqmyTK4+tfUNVarnTCDZho6uobBruGya7xoWubxdroEFz4fdbcRfPrpqTLQVMM201EbmQGB5xc8aUsCbkDFsZWlS2keObkj2cbx4nSE6Gtit3rZrdG2vjbbldRDqBl22h3UJo9W7YvUoyIAaJhd0HaPom8N3H7ADRSYPcp2GTcGrO1e7Q0tAeEHAYjRXYptfu67bHpuyP5kA8IbfEAPuyaYQ8Wmx7Acqe1h5goL27UMcoJgZr9NOMqPHjOjxGaY8Cchg19v-mmbrkCe8zYnos17jLNYCFPHwVT10w08wOaBCDpgX2YwcWeT5Nnoh3Oa7RSCPPNDpQQw40Fja2HU2h-HNqEhReEFcXnbWI58QvmAhRCklko4K8AWIAIFmUxBb+1wWeFTIFCxDq69VC1WA3gi0oox0+OJvFFubw6wYtLeiNCwuJw4qSdCWPFBwnKDk7TZyW7vJTp7xU40s1OVdDTjXQgR10g+7iPTqHw5bh9jO3LMzu01j5WdJgCfbInILyK7VABE9Vzqo2z48QiUWg-PvDU+779vuyrZ6E0TXrl86YlfVxg2Twh19FkB9KCB4Cb5jEOUZ9ahk-0vqXJO+8xW+rfxWJPIn6g-OfqAxH4uD-k4-I4n-UfqOCZ+IDTskDlTCL92y9xPPNmCeJr8h+G-WViYPlbec8BY1JHMYJIDQjcG33ELufzC56sSG4Ve1hQxi7okKBz-bpElzxIpcrWn-G1hlV-6UkBcNJPKsAMIpFcPW4Ar1hySgHckququOAT+2DaIC+OYbGNKgMbBRsMBvVTQdoKXp6C12hAwbsY2qazVTB8ohVNQJAC0CS2NpRxkwNT4J42By3dxqtxAxeM4yXpHgZdX9I3VBBJeTtiIJO69s3qBnWvJ9Uu6JlruyfeQckw7yYtHuKgwDC9yhoiwtANEN0b1z5GeiUM6bLmr6Oww0QzBFguMsTWsFUZbBqcKmuewhQ9MSRTAtwc-hZpeCP8CBf7pMwCHvsghn7QnoLVCF-twhAHVZtENPKgdLy8tJISvBSGbxWetmU5kQU54XNPyOQn8uh356FDBeOHEoXhxebW1wsVQyXjUNI7fNZeSFP5lR2aGtD9Y7QnChr3kI9CdexFfoeoUN7DCkWYws3kYUmFMUsW1vMTriwk7DYHeWKGTnnQ0Tyd1hinQXspyWw7DK6fhfYYy0OHacG6sbCmPp0M4XD26JnTurdn0rHI+68fZJKZST6JMU+C3WktGmlYxtPhs9WiI2N5F6NOyq9RkevTaI1It61fGpjRBhEN94RlIiFCfRb57IAxluWYpiJvoDk76uIqfoA3OJD8iR79ccQkDJFZIRx0-TYsAwsm0iwGX9WkA8RZGr9uK7I7qu5wbG-CKUPIgEcX0wakDaIJ-SEt5MIaE4r+ItUhtKMpySpYuqIi+ma1f7Kj3+qVdLra1fyaj+cXDPLnSV4Zi4iqhooRjLkgHJAxGMAi0SGlq734RSKAtqmgKNytduqmA+UmQH8nb9BqbSQvsFPwGo0vR6bIbh2JBJdjdJBbLLCGLPL0DNq0eCMQtyjGTJ2BsYzgfGPW6JifGW3FMbtzTHBMhBmY47hE1AHRlzuBY6QT9RHa3cFB5Y4GukzzLPdCyGgkSBJIGnNikMf3PwQD1IHaASA3Yxpr2MPak0BxFNIcWezh5MYr2n9ZHu4LvbDNZxYzb6QuMdh48NyQMAWkSUUwbiDy4tKIQgRA5xD9xiQvZkeOZ4ni0hZ49nhePtFZDue18W8XkPvF0FHxxQ5gs83KGvN3x0FOsFLyWJ1DfmjQ0Qp7WsbATVeoLAOhC26Ha8iKYddjvr045DCeOIwpAE1lN4GEJh6LFCVb1YroTbemEgljnWJYrCXeBEt3kRLErbDveuwiiX7wOE7ZA+LLYPmyzOF5iYiF2S4ZHzYl8sOJcfDItxOFbmU+JP2VPoJLeElERJM9OpH9LenLsSmHokAMCNL6gjWiFfBSVXy6LY0-pqkuEYMUcFaTkRrfSaQl277X1oexkvvhpIcn4pnJfsL5FZOva2TjikMlGWDicmEiXJC-NycimZFoovJsDOFG505ExyApVjKlE2KkkqpjB2c4UZq1FEBVxRxDa-vFLynGs5RKU-NiXISqAkLWYxVURzmykajIqf-HLjqPy58N9Rp0kAJ6wqnesqpFXGqXyUtENUGpzVJqVcGa6tTnR6jUgCPJ6laN+pccg-kNNbFu4fRW7GZH9LMFBiZp9jBgQtJTiRjWBK0mMXWwbYbcm2fjHbq2wEEHSMxZecJj2yvmSCLpcTWQSWPfSKCKxygx6aoJrHD4XpSkWOUjUBEEDQFyMtVL9J9zFzQe+Y2kX2KPagz2mw4luU4OhmuDH8KPeGTOPZpY9KmZknmkuPx4riQhP7EnvuTJ6RD4CJ5QmbLTp5RxIOS8JnjgVSHHMqZGQy8XTOvEMy7++Qo2izIYKPMReVtMLMgHebVC+CTtcjn+KFke10KyvYFuLI6FMdwJMspQnLL14DDFZFFZWfBK4TqyE6aLIwFMOYq9Y9ZQMO3gsKNnLCnCZs4SsXWIlbDSJ1s8ifSwCIB9gixw03PRNdmMSPZzEq4VHxuGWcjK9wgObZ14kt4HOf2Jzun2EkfCo5v88DKPMKaAKWFIUleiCNklgjN6GcwHjoAxx716+uchEU-QLk7Ii5G8+Lk0n0mIYu+2I5YpXNOIEi4Glk3YqSKX4T97JCi94u3NOWdz6R3cpkVA1ZHeS5+HIikNHOGX-yvO48ySauxVbTyMcs84LmfwXlBUJRy8qUavNlFmDFR6UvgkwzVGHzMux8rUQVMAH0kSp7rNWDfLKp3yFc0A-1rVPgGa4mqdo5Dkoy-kxsOpXy5hboJ+4tjJqRjTNmNKGXQLRZwYqbnQLDHltFpPSxbtGNrZukNp3AnaS22ha4KDu+CrttmOIXnTaRX1IseQuDmUK7paTXMmDWrHPS6xOgMfCMsTb-KE5A3NsTjzZV6qAZjI8HuRhBn9kwZtGCGQ4NHEI9rJD+NOHDOnEPtvBc4jhauUCHKLgCX7InmorCG4zye2i9ZrEL0UJD6ehi6DuTPNynj4O54rWlz2sXkE+e1BexSbUYLPjnFYvbmR8y-HS8fxghHxfL2Fn+LOVPtfBBLM6Ga9pZrHKCZViiVR04JxveJeMKQlazk6Mwm3hkoNlcUcJTvE2fhLWHmyRKhSrQsUpWw+89hdsqiQ7MqVOyThIfVSucPqWhIWJPLaPvdl9l3Cco7SxPkHK6X8SBVYclzhHIGUVFo5+qn5QX3+FALWFJGGSd-TklpyxkkIrOWCSWWwjlkqy-Oc30Lk6StllA9vhiL2VYijJOIo5fiM2K1zE59c85Q+ibkUjjljk2fvcrrmuSIGHkvuTA1dUytPlv8u9SXJ36BS-l70yeYCvmVOQIpflKKRfxikRcb+CU+-slMf6pTFS28pHLvKRUHziSR88huiqdaCSsVbrA0biqNG3yTR98oleaKfl1TrRr8ildrQoIdUVG7Ul0XqvpXxzGVn0gwSypIHdEnIHKwtpN2LazTeVjAxBUtOQUHU1p6CraZtx9K7ScFhePBV8iOnHo5V4gkhYqsLFDsVVp60sWO1SaTsHpWqiGnO0YX9V71fw3AVRoBUmr5xnCkzU2R4UE0rVlgm1VD274w9L8VcqGYnBhmM0pFnqguBjx9XyLW5bMf1ejJbhBq1xIanGZosA47jdFF5bZrGsPHmYTFFMsxcmupmpqrxqHRmQbSzV3NWZua9mWUJcWEcPxvM4tfzOdpy8UsAEkWeZrFm1rglYEljtCz6EtqYJSsvMLx1Vn8cNZ3a5JdrL7XpKQAmSrCVJ2HXGzcl46-JR72nVeEyJdLauouvkqOydOq6l2eurdnqUmJW6xpd7Is77rWlh6t7MeuukhyBJtlDPm8VEnRy4tZG3qaMsfXjLBpky5OdMtTngj05X6g0toG8q-q1JeczSUBo2UgbONm8nZR30g2GTbkMGh+uhprkdzsNxIxuZcvJGT8ittWi4jSOw1dzcNvc6Bs8UI1DziNOgTHU0nI1jzo2Rq-Tf53J3eUQVp-fytFPC76sV5aK9jevMZ3bKBYPGlVHxtS7IrBNqK4TflNE26iCul88QXitK4ErqpxKxTaSpDa2jkBtMj+S1M6ptdtNFO3TcAtTbDSwFrKiBWjgp1mbpp3K0MRtXDG2aBVy0hzWgq4EYLkxEq-gR5ulVeaCFog07n21B0DsyFyZVVWmSoX3TNVM7ehTk2jmw0DVS7PHR9JS0cLzV2gcxplvMGAz+FwMvLSe3Bn2DTJl7ErRIvdVTi0eXqxGRzVS1+qlFDWzGQs1a0RD2tBM6ntGqvIGLetBzIGLBw1oOYQuaasbbYuZk5qnFYFTmW+LcUS8ltnimXmWoaEVq-FNHatSBPV6B0teTaiJdBOzDRLuOp2lWWrK7UMVkJvatJf1kHXYSiWOS1YYJQnUFLLZM6qSvOoZZyUjhK66pREVpFh9N1yQbddcPYlxI-Z1nI9Y8IoUOkJWQk94b5OHkt74tFG1XUloTka7IFODbzHg3nl67IVcU6FUbrXlwqLdKrK3fvJ1S26f+Ru--mfKKl6imSxXCAR7ofle66qz8+qeSv92UrP5werTT-J0BMGsdAC3HQyv65fSjNw3Ezb3tA3P8YFSeqzSnr5Vp7rKGetxlntFU57xV2CyVQXoPTCDjpRCvzQqrrlKqgtVekLWqvHbULItDenVbk1-n5NW9Yysw2wuZXLkfpJm3NrYYabZagZVgwRXauEWOrx9YiyfX00kUerZ9lW71UjJq2496twQ79tjMgKbjDy24rfVGq636KbyjPZIQmrVpwcgYCHE-ZkJ1pXNxtVBbzNmqKEzbSh+HCoYWo8W1DVt5a9bU0M23e0v9ksroQRV6HNqOOba2JR2rPLgHE6kB4TrdpgPzDHtiw3Cc7zHVIH3tmwz7RJRKU-bKJWBmiayxqUg66lmlT2aZyaWkG0isOgeh0pPWplmBvSug1eoYPy77o3IyjU+omX8jaN6rbXZFIIZMb9dkomYFFyirCG+98KxKm-z3kf8BNrDaQ-btkPcN5DzuxQ2VJK7DHKphKs0a-lgFKaEBKm7Q2pqpV6GgdHXHQEkeYN9TTDem8w4ZuIFWGs52R03WBtbScrYFM3eBdtSQWuNVpHh4fAmNpFJjvDfAwJrdX8PebwyYgs7uXqkGV7UWUJ26dEbr2g04jMbIstoC67JHxTEe-QVHq72x7f5O7PvT2MH0FHbV0POwYVtOJjjr2sMmfZ4Ln2yLfB9RpfXlA-aBrVxWM39q0bDVaLJafKTrbTxjV77SZfWh8qYqGP7wU1p+0bRMYv2TaBeji4Xjfvm2VCeZvBFY94tf3rHK1H+rbdliCWgSf9jag7QcYVlHGQDcS044hIgM9rLj0B9ipnVuPZLZOpst7RSxeOeE3js6m2WUv97USAdtEjqQxPOwAmGlXs7utDrIMHrwTCOp4TQZhPhzM+ZRQZToFdOimcdiWlE-juklTK31MyiEdvSzmBcqdKy4XSMTp3JgUR8phUbssdj7LoNhyznXBu51YbENb9ZDTZIF12TRF1IhDf7Bw1L88N0utke8vhOEpfTSJ1g++Y+kcG49gXTEwxuxOLzYpTJJEkIdhXEnRDuJRFdbspPf9cpMh0+XSaAEMnSpUm8qfitk1sm-WCm9Q1ybJX1c38EbIPZpsFNYDSLbpt8+3uo2d7LD3ev0zkcDxKmHDcC+aWqbs0anUFIq7U5tN1PbTXNeew0+mKL2yqTpwRi06Qqu7BabTZYu0xqodNPSuqpSA5MDC6AAA1chBZF5ggBjA2gaUkAA">TypeSafe playground에서 이어 붙인 메모와 질문 열기 →</a></p>
+<hr />
+<h1 id="_5">부록<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h1>
+<h2 id="threshold">이어 붙이기 threshold의 근거<a class="headerlink" href="#threshold" title="Permanent link">&para;</a></h2>
+<p>1단계에서 얻은 줄별 이어짐 확률은 다음과 같습니다.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">"join  line"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">LINES</span><span class="p">):</span>
+    <span class="n">join</span> <span class="o">=</span> <span class="s2">"    "</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">line</span><span class="p">[</span><span class="s2">"gap"</span><span class="p">]</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">'joins'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">join</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">line</span><span class="p">[</span><span class="s1">'text'</span><span class="p">][:</span><span class="mi">66</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>join  line
+      L000| Migration to the new build system
+      L001| Hi everyone, quick heads up about the build system migration that 
+0.97  L002| happening next week. We have been running the new pipeline in shad
+0.79  L003| mode for three weeks and the results look solid, so it is time to
+0.95  L004| make the switch for real.
+      L005| What changes for you
+      L006| The old make targets keep working until the end of the month. The 
+0.61  L007| entrypoint is a single command that wraps everything, including th
+0.95  L008| docs build that used to be separate.
+      L009| bun run build
+      L010| Generated artifacts no longer need to be committed. The new pipeli
+0.82  L011| uploads them to the registry automatically, and checking them in
+0.92  L012| just creates merge conflicts.
+      L013| The cutover touches three teams, so check whether you are on this
+0.92  L014| list before you plan anything for Monday:
+0.16  L015| The platform team
+0.04  L016| The web client team
+0.06  L017| Whoever still owns the release tooling
+      L018| Things to do before Monday
+      L019| Update your local toolchain to version 2.4 or later
+0.02  L020| Delete the old build cache directory
+0.02  L021| Run the doctor script and fix anything it flags
+      L022| If the doctor script reports a red result on the toolchain check, 
+0.89  L023| not proceed with the migration. Ping the infra channel first and w
+0.93  L024| will sort it out together.
+      L025| As Dana put it in the kickoff, "a migration nobody notices is the
+0.94  L026| only kind worth shipping."
+      L027| Thanks, and shout if anything looks off.
+</code></pre></div>
+<p>이 메모에서는 확률이 서로 떨어진 두 구간으로 갈립니다. 문장을 갈라놓은 줄바꿈은 0.61
+이상이고, 작성자가 의도한 줄바꿈은 0.16 이하입니다. 따라서 여기서는 그 사이 어느 값을
+기준으로 잡아도 결과가 같습니다. 그래도 코드는 <strong>앞줄이 어떻게 끝나는지</strong>에 따라 기준값을
+정합니다. 이것은 코드가 직접 읽을 수 있는 사실입니다.</p>
+<ul>
+<li><em>끝맺지 않은</em> 줄(문장을 끝내는 문장 부호가 없는 줄) 뒤에서는 문장이 아직 끝나지 않았을 수
+  있으므로, 확률이 0.2 이상이면 두 줄을 합치기에 충분합니다.</li>
+<li><em>종결</em> 문장 부호(문장이나 절을 끝내는 문자: <code>.</code> <code>!</code> <code>?</code> <code>:</code> <code>;</code>) 뒤에서는 기준값이 0.5로
+  올라갑니다. <code>L015| The platform team</code>은 콜론 뒤에 오는데, 콜론 뒤에는 목록이 올 수도 있고
+  문장의 나머지가 올 수도 있습니다. 여기서는 0.16이 나왔습니다. 점수가 더 높게 나왔더라도
+  0.5를 넘어야만 목록이 그것을 소개하는 문장에 합쳐집니다.</li>
+</ul>
+<h2 id="_6">질문이 "같은 문단"이 아니라 "문장 중간"인 이유<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>이 pipeline의 첫 버전은 누구나 떠올릴 만한 질문을 던졌습니다. "이 두 줄은 같은 문단에
+속하는가?" 그런데 제목 아래에 짧은 줄이 이어지는 경우(기호 없이 입력한 목록)는 느슨한
+의미에서 문단이 <em>맞습니다</em>. 줄들이 한데 모여 있고 주제도 같기 때문입니다. 문단을 기준으로
+물으면 모델은 모든 쌍에 "예"라고 답하고, 이어 붙이기 단계는 목록 전체를 긴 블록 하나로
+합쳐 버립니다.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">naive_join_question</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Noul</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Noul</span><span class="p">(</span>
+        <span class="n">instructions</span><span class="o">=</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">'Line </span><span class="si">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1"> is "</span><span class="si">{</span><span class="n">LINES</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">][</span><span class="s2">"text"</span><span class="p">]</span><span class="si">}</span><span class="s1">" and line </span><span class="si">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> is '</span>
+            <span class="sa">f</span><span class="s1">'"</span><span class="si">{</span><span class="n">LINES</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">"text"</span><span class="p">]</span><span class="si">}</span><span class="s1">". Are lines </span><span class="si">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1"> and </span><span class="si">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> part of the '</span>
+            <span class="s2">"same paragraph?"</span>
+        <span class="p">),</span>
+        <span class="n">criteria</span><span class="o">=</span><span class="n">NoulCriteria</span><span class="p">(</span>
+            <span class="n">true</span><span class="o">=</span><span class="s2">"The two lines belong to the same paragraph of running text"</span><span class="p">,</span>
+            <span class="n">false</span><span class="o">=</span><span class="s2">"The two lines belong to different paragraphs or different pieces of content"</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="n">naive</span> <span class="o">=</span> <span class="n">stitch</span><span class="p">(</span>
+    <span class="n">tag</span><span class="p">(</span><span class="n">LINES</span><span class="p">,</span> <span class="s2">"L"</span><span class="p">),</span> <span class="n">as_json</span><span class="p">(</span><span class="n">stitch_questions</span><span class="p">(</span><span class="n">naive_join_question</span><span class="p">)),</span> <span class="n">model</span><span class="o">=</span><span class="n">TYPESAFE_MODEL</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">''</span><span class="si">:</span><span class="s2">14</span><span class="si">}{</span><span class="s1">'mid-sentence'</span><span class="si">:</span><span class="s2">&gt;13</span><span class="si">}{</span><span class="s1">'same paragraph'</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">line_id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}{</span><span class="s1">''</span><span class="si">:</span><span class="s2">2</span><span class="si">}{</span><span class="n">LINES</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'text'</span><span class="p">][:</span><span class="mi">36</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;38</span><span class="si">}</span><span class="s2">"</span>
+          <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">'joins'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;7.2f</span><span class="si">}{</span><span class="n">naive</span><span class="p">[</span><span class="s1">'joins'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;13.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">blocks after merge: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span><span class="si">}</span><span class="s2"> (mid-sentence) vs "</span>
+      <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">merge</span><span class="p">(</span><span class="n">naive</span><span class="p">[</span><span class="s1">'joins'</span><span class="p">]))</span><span class="si">}</span><span class="s2"> (same paragraph)"</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>               mid-sentence  same paragraph
+L015  The platform team                        0.16         0.41
+L016  The web client team                      0.04         0.61
+L017  Whoever still owns the release tooli     0.06         0.63
+L020  Delete the old build cache directory     0.02         0.62
+L021  Run the doctor script and fix anythi     0.02         0.72
+
+blocks after merge: 17 (mid-sentence) vs 13 (same paragraph)
+</code></pre></div>
+<p>문단을 기준으로 물으면 각 목록에서 첫 항목을 뺀 모든 항목이 0.61에서 0.72를 받습니다.
+끝맺지 않은 줄 뒤에 적용하는 기준값 0.2를 훌쩍 넘는 값이어서, 목록마다 블록 하나로
+뭉개집니다. "같은
+문단"은 주제가 이어지는지를 모델에게 판단하게 하는 질문이고, 목록 항목 사이에서는 주제가
+이어집니다. "문장 중간에서 이어지는가"는 텍스트 자체를 묻습니다. 판단 결과가 threshold에
+쓰인다면, 질문은 그 판단을 가르는 가장 좁은 사실을 짚어야 합니다. 여기서는 질문 문구에
+따라 블록이 17개가 되기도 하고 13개가 되기도 합니다.</p>
+<h2 id="confidence">confidence가 가장 낮은 블록<a class="headerlink" href="#confidence" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">uncertain</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">b</span><span class="p">:</span> <span class="n">b</span><span class="p">[</span><span class="s2">"confidence"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'"</span><span class="si">{</span><span class="n">uncertain</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span><span class="si">}</span><span class="s1">"'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"confidence </span><span class="si">{</span><span class="n">uncertain</span><span class="p">[</span><span class="s1">'confidence'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">: "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span>
+                <span class="nb">sorted</span><span class="p">(</span><span class="n">uncertain</span><span class="p">[</span><span class="s2">"probabilities"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:</span> <span class="o">-</span><span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="mi">3</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>"The cutover touches three teams, so check whether you are on this list before you plan anything for Monday:"
+confidence 0.65: paragraph 0.71, callout 0.25, heading 0.03
+</code></pre></div>
+<p>팀 목록을 소개하는 문장입니다. 문단으로 읽히지만, 행동하기 전에 무언가를 확인하라고 독자에게
+알리기도 하는데, 이것은 callout이 하는 일입니다. 확률도 그에 맞게 나뉩니다(paragraph 0.71,
+callout 0.25, heading 0.03). UI에서 이 점을 드러낼 수도 있습니다. 예를 들어 유형
+confidence(신뢰도)가 0.7 미만인 블록에 밑줄을 쳐서 검토하도록 표시하면, 이 페이지에서는 이
+블록 하나만 걸립니다.</p>
+<p>이 문서는 개발자 문서 플랫폼인 <a href="https://mintlify.com">Mintlify</a>로 제작하고 호스팅합니다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../pre_parsed_value_extraction_cookbook/" class="md-footer__link md-footer__link--prev" aria-label="이전: 미리 파싱한 값 추출">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                미리 파싱한 값 추출
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../cart_from_primitives/" class="md-footer__link md-footer__link--next" aria-label="다음: 장바구니">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                장바구니
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      비공식 한국어 번역본입니다. 원문과 저작권은 TypeSafe에 있습니다: <a href="https://docs.typesafe.ai">docs.typesafe.ai</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

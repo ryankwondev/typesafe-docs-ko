@@ -1,0 +1,6656 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TypeSafe System One API 문서의 비공식 한국어 번역">
+      
+      
+      
+        <link rel="canonical" href="https://ryankwondev.github.io/typesafe-docs-ko/concepts/use-case-map/">
+      
+      
+        <link rel="prev" href="../../introduction/machine-learning-primer/">
+      
+      
+        <link rel="next" href="../system-one/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>사용 사례 - TypeSafe 문서 (비공식 한국어 번역)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    <meta name="robots" content="noindex, nofollow">
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="TypeSafe 문서 (비공식 한국어 번역)" class="md-header__button md-logo" aria-label="TypeSafe 문서 (비공식 한국어 번역)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TypeSafe 문서 (비공식 한국어 번역)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              사용 사례
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TypeSafe 문서 (비공식 한국어 번역)" class="md-nav__button md-logo" aria-label="TypeSafe 문서 (비공식 한국어 번역)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TypeSafe 문서 (비공식 한국어 번역)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작하기
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    시작하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    빠른 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/coding-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    코딩 에이전트와 Jev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/machine-learning-primer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 입문
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개념
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    개념
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    사용 사례
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    사용 사례
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사용 사례 카테고리
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사용 사례와 예제
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="사용 사례와 예제">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        비즈니스 프로세스 자동화
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실시간 앱
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        대규모 검색과 레이블링
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        에이전트와 검증
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지와 비디오
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        그 밖의 산업
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        코드 워크플로에 Jev가 필요하다는 신호
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        나만의 워크플로 설계하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System One
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-build-with-system-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TypeSafe로 구축하는 방법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primitives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primitives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primitive(질문)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/choice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Choice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/score/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Score
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/noul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/box/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Box
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced: structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    이미지
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../confidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Confidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    패턴
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    패턴
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    패턴
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/fan-out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Speculative fan-out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/noul-screen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noul로 먼저 선별하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/companion-noul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Companion Noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/confidence-routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Confidence 기반 routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/probability-routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    확률 기반 routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../patterns/composite-scoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Composite scoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookbooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cookbooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/function_calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/skill_suggestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skill 추천
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/llm_guardrails/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM을 위한 Guardrail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/citation_check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    인용 재확인
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/verify_llm_outputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM의 답을 출처에 비추어 검증하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/classifying_rag_passages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG passage 분류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/basic_memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    간단한 메모리 시스템
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/hierarchical_classification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    계층적 분류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/classification_using_confidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    confidence를 활용한 분류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/twitch_chat_filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Twitch 채팅 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/sde_cascade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDE cascade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/date_extraction_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    날짜 추출
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/pre_parsed_value_extraction_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    미리 파싱한 값 추출
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/autoformat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    구조 복원
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/cart_from_primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    장바구니
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/reading_scanned_documents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스캔한 예방접종 기록 읽기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/ocr_confidence_bounding_boxes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OCR confidence와 bounding box
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/feeder_watch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    새 모이통 카메라 방문 기록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/rerank_typesafe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Re-ranking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/infinite_cardinality_choice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    무한 cardinality Choice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/semantic_find/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    줄 단위 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/entity_alignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge graph의 entity alignment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/intelliprompter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intelliprompter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/consistency_choice_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-consistency: Choice 질문
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/consistency_noul_cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-consistency(자기 일관성): noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/parallel_questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parallel questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbooks/autoresearch_feature_discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autoresearch feature 탐색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    데모
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    데모
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jev로 만든 프로젝트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/airbnb-listing-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google Sheets에서 Airbnb 숙소 검색하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/smart-home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스마트 홈 어시스턴트 데모
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demos/content-audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jev로 하는 콘텐츠 감사
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모델
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agent-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent skill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    법적 고지
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model-jaggedness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model jaggedness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모델 변경 이력
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/system-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System One
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/list-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모델 목록 조회
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    요청 규칙과 오류
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SDK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    클라이언트 SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2" id="__nav_15_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TypeSafe Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_2" id="__nav_15_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    사용법
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    사용법
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/usage/basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기본 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/usage/advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    고급 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    변경 이력
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_4" id="__nav_15_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API 레퍼런스
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_4_2" id="__nav_15_2_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clients
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clients
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/clients/async/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    비동기 클라이언트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/clients/sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    동기 클라이언트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2_4_3" id="__nav_15_2_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Types
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    질문
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/responses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    답변과 응답
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/types/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공통 타입
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/retries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    예외
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/python/api/constants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    상수
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3" id="__nav_15_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JavaScript
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    JavaScript
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JavaScript SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    변경 이력
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3" id="__nav_15_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API 레퍼런스
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_2" id="__nav_15_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIConnectionError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIConnectionError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIPromise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIPromise&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APITimeoutError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APITimeoutError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/APIUserAbortError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: APIUserAbortError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/AuthenticationError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: AuthenticationError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/BadRequestError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: BadRequestError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/Image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: Image
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/InternalServerError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: InternalServerError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/NotFoundError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: NotFoundError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/PermissionDeniedError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: PermissionDeniedError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/RateLimitError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: RateLimitError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/TypeSafeClient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: TypeSafeClient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/TypeSafeError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: TypeSafeError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/classes/UnprocessableEntityError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class: UnprocessableEntityError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_3" id="__nav_15_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaces
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interfaces
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/BoxCoordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: BoxCoordinates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/BoxQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: BoxQuestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/BoxResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: BoxResponse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ChoiceQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ChoiceQuestion&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ChoiceResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ChoiceResponse&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Logger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ModelCard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ModelCard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/NoulQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: NoulQuestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/NoulResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: NoulResponse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/RequestOptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: RequestOptions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/RetryPolicy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: RetryPolicy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ScoreQuestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ScoreQuestion&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/ScoreResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: ScoreResponse&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/SystemOneRequest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: SystemOneRequest&lt;Q&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/SystemOneResult/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: SystemOneResult&lt;Q&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/TextWithAssets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: TextWithAssets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/TypeSafeClientConfig/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: TypeSafeClientConfig
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/Usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/interfaces/WithResponse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface: WithResponse&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_4" id="__nav_15_3_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Aliases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Type Aliases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Asset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Asset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ChoiceCriteria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ChoiceCriteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Compression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Compression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ContentValue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ContentValue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/EntryType/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: EntryType
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/EnvVar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: EnvVar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Fetch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Fetch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/JsonValue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: JsonValue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/LogLevel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: LogLevel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/Question/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: Question
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ResultFor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ResultFor&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ScoreCriteria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ScoreCriteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ScoreLegend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ScoreLegend&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/ScoreOf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: ScoreOf&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/type-aliases/SentContent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Alias: SentContent&lt;T&gt;
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_5" id="__nav_15_3_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variables
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Variables
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/ENV/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: ENV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/LOG_LEVELS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: LOG_LEVELS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/noul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: noul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/score/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: score
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/VERSION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: VERSION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/variables/withAssets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variable: withAssets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_3_3_6" id="__nav_15_3_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_15_3_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_3_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Functions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/functions/box/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function: box()
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/functions/choice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function: choice()
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/javascript/api/functions/image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function: image()
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사용 사례 카테고리
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사용 사례와 예제
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="사용 사례와 예제">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        비즈니스 프로세스 자동화
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실시간 앱
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        대규모 검색과 레이블링
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        에이전트와 검증
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지와 비디오
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        그 밖의 산업
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        코드 워크플로에 Jev가 필요하다는 신호
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        나만의 워크플로 설계하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">사용 사례<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Jev가 판단을 내리고 코드가 그 판단에 따라 움직이는 비즈니스 워크플로를 만들어 보세요.</p>
+</blockquote>
+<p>사용 사례로는 송장 확인, 채팅 모더레이션, LLM 앱 보호, 문서 검색 등이 있습니다. 카테고리를 골라 해당 사용 사례를 살펴보고 각 사례에 딸린 예제를 실행해 보거나, 계속 읽으면서 이런 사례를 어떻게 만드는지 알아보세요.</p>
+<h2 id="_2">사용 사례 카테고리<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><a href="#business-process-automation">비즈니스 프로세스 자동화돈이 움직이기 전에 송장, 청구 건, 문서를 확인하고, 불확실한 건은 사람에게 보냅니다. 제어 흐름은 마크다운 파일이 아니라 코드가 책임지므로, 사람이 옆에서 거들지 않아도 백그라운드에서 백만 번씩 실행됩니다.</a></p>
+<p><a href="#real-time-apps">실시간 앱약 150ms 만에 얻는 프런티어급 지능입니다. 라이브 UI, 음성 비서, 게임, 실시간 채팅 모더레이션에 쓸 수 있을 만큼 빠릅니다.</a></p>
+<p><a href="#search-and-labeling-at-scale">대규모 검색과 레이블링프런티어 LLM보다 약 100배 저렴하므로, 모든 행과 줄, 레코드마다 질문을 던진 다음 결과에 순위를 매기거나, 걸러 내거나, 레이블을 붙일 수 있습니다.</a></p>
+<p><a href="#agents-and-verification">에이전트와 검증다른 AI가 저지르는 jailbreak(탈옥), hallucination(환각), 인용 오류를 LLM 호출 비용의 일부만으로 잡아내고, 에이전트에 routing(라우팅)과 안전 검사, 새로운 능력을 더합니다.</a></p>
+<p><a href="#images-and-video">이미지와 비디오스캔 문서, 사진, 비디오 프레임 안의 내용을 찾고, 읽고, 확인합니다.</a></p>
+<h2 id="_3">사용 사례와 예제<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_4">비즈니스 프로세스 자동화<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>돈이 움직이기 전에 문서와 청구 건을 확인하거나, 문서의 값을 손으로 옮겨 적거나, 쌓여 있는 알림을 하나씩 처리하는 팀을 위한 사례입니다.</p>
+<table>
+<thead>
+<tr>
+<th>사용 사례</th>
+<th>Jev가 판단하는 것</th>
+<th>코드가 하는 일</th>
+<th>예제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>송장을 지급해도 되는지 결정하기</strong></td>
+<td>송장, 구매 주문서, 계약서, 공급업체 레코드, 이전 송장, 주고받은 서신, 납품 증빙, 승인 내역에 대한 질문</td>
+<td>사기나 중복이면 중단하고, 그렇지 않으면 보류, 개별 항목 이의 제기, 수정 송장 요청, 승인 요청, 청구 금액보다 적게 지급, 지급 일정 등록, 지급 중 하나를 수행합니다</td>
+<td><a href="https://evals.typesafe.ai/invoice_processing">워크플로 보기 ↗</a></td>
+</tr>
+<tr>
+<td><strong>송장의 OCR 값과 bounding box(경계 상자) 확인하기</strong></td>
+<td>OCR 추출기가 읽은 각 값이 페이지의 어디에 나타나는지, 페이지가 그 값을 뒷받침하는지, 해당 box를 잘라 낸 이미지도 그 값을 뒷받침하는지</td>
+<td>필드를 승인하고, 점수가 낮은 필드는 검토로 보냅니다</td>
+<td><a href="../../cookbooks/ocr_confidence_bounding_boxes/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>송장 합계처럼 미리 파싱된 값 추출하기</strong></td>
+<td>정규식이 찾은 후보 중 어느 것이 요청한 값인지</td>
+<td>해당 텍스트를 나타난 그대로 복사하고 표준 형식으로 변환합니다</td>
+<td><a href="../../cookbooks/pre_parsed_value_extraction_cookbook/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>문서에서 날짜 추출하기</strong></td>
+<td>요청한 각 날짜에 대해 문서가 어떤 일, 월, 연도 또는 상대 날짜("next Thursday" 등)를 말하는지</td>
+<td>달력상의 날짜를 계산하고, 유효한지 확인하고, confidence(신뢰도)가 낮은 날짜는 검토로 보냅니다</td>
+<td><a href="../../cookbooks/date_extraction_cookbook/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>일반 텍스트 문서의 구조 복원하기</strong></td>
+<td>어느 줄이 앞줄에서 이어지는지, 각 블록이 제목, 목록, 코드, 콜아웃 중 무엇인지</td>
+<td>문서를 Markdown으로 다시 구성합니다</td>
+<td><a href="../../cookbooks/autoformat/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>SEC 공시를 산업별로 분류하기</strong></td>
+<td>SEC 연차 보고서가 75개 산업 그룹 중 어디에 속하는지</td>
+<td>해당 그룹을 보고하고, 답의 confidence가 낮으면 그 위의 더 넓은 대분류를 보고합니다</td>
+<td><a href="../../cookbooks/classification_using_confidence/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>요청 한 번으로 규정 요약하기</strong></td>
+<td>GDPR의 Wikipedia 문서에 대한 질문 13개. 예를 들어 데이터 유출을 72시간 안에 신고해야 하는지, 이 법이 EU 밖에도 적용되는지, 과징금이 얼마나 커질 수 있는지 등</td>
+<td>요청 한 번으로 13개의 답을 모두 받습니다. 하나씩 묻는 것보다 약 12배 저렴하고 빠릅니다</td>
+<td><a href="../../cookbooks/parallel_questions/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>보안 알림 선별하기</strong></td>
+<td>해당 활동이 무단 활동이었는지, 티켓이나 일정으로 설명되는지, 증거가 얼마나 강한지</td>
+<td>설명되는 알림은 종료하고, 불분명한 알림은 대기열에 넣고, 확인된 사고는 확산을 막는 조치를 합니다</td>
+<td><a href="https://evals.typesafe.ai/security_incidents">워크플로 보기 ↗</a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[accordion] 실전 예제: 매입 채무 수신함에서 송장 사기 잡아내기</p>
+<p>재무팀의 공용 수신함에는 송장, 지급 독촉, 공급업체의 문의가 들어옵니다. 그중 일부 이메일은 공급업체를 사칭해 새 은행 계좌로 지급해 달라고 요청합니다. 평범한 공급업체 이메일처럼 읽히기 때문에 스팸 필터는 이런 메일을 통과시킵니다.</p>
+<p>Jev에게 이메일이 사기인지 묻는 대신 사기의 징후를 물으세요. 이메일, 등록된 공급업체 레코드, 미결 송장, 그리고 이메일이 사기인지 판단하는 데 도움이 되는 구체적인 질문을 요청 하나에 담아 보냅니다.</p>
+<ul>
+<li>이 이메일은 재무팀의 조치가 필요한가요?</li>
+<li>발신자 주소가 이메일에 언급된 공급업체의 것으로 보이나요?</li>
+<li>이메일이 공급업체의 지급 정보나 은행 정보를 변경해 달라고 요청하나요?</li>
+<li>이메일이 읽는 사람에게 빨리 조치하라고 압박하나요?</li>
+<li>이메일은 어느 미결 송장에 관한 것인가요?</li>
+<li>이메일이 미결 송장을 하나라도 언급하나요?</li>
+</ul>
+<p>코드는 먼저 사기 규칙을 확인하고, 그다음 이메일에 조치가 필요한지, 마지막으로 어느 송장에 관한 것인지 확인합니다. 다음 단계에 필요한 답이 불확실하면 이메일을 재무팀으로 보냅니다. 어떤 조치에 필요한 답이 분명하다면, 나머지 답이 불확실하더라도 그 조치는 그대로 진행합니다.</p>
+<table>
+<thead>
+<tr>
+<th>답</th>
+<th>조치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>지급 정보나 은행 정보 변경을 요청하고, 발신자 주소가 이상해 보이거나 이메일이 읽는 사람을 압박함</td>
+<td>해당 공급업체에 대한 지급을 보류하고 재무팀에 알림</td>
+</tr>
+<tr>
+<td>사기 규칙에 걸리지 않고, 이메일에 조치가 필요 없음</td>
+<td>보관 처리</td>
+</tr>
+<tr>
+<td>사기 규칙에 걸리지 않고, 이메일에 조치가 필요하며, Jev가 threshold(임계값)를 넘는 확률로 식별한 미결 송장을 언급함</td>
+<td>해당 송장 담당자에게 전달</td>
+</tr>
+<tr>
+<td>사기 규칙에 걸리지 않고, 이메일에 조치가 필요하며, 미결 송장을 언급하지 않음</td>
+<td>재무팀으로 전달</td>
+</tr>
+<tr>
+<td>사기 규칙, 조치 필요 여부 확인, 송장 매칭 중 하나가 의존하는 답이 불확실함</td>
+<td>재무팀으로 전달</td>
+</tr>
+</tbody>
+</table>
+<p>각 규칙이 사용하는 답마다 확률 threshold를 정하세요. 의심스러운 지급 요청을 놓치는 것보다 지급을 잠시 보류하는 편이 비용이 덜 든다면, threshold를 낮춰 검토 대상으로 보류되게 하세요. 보관 처리에는 더 강한 증거를 요구하세요. 사기 규칙에 해당하지 않는다는 점이 확인되어야 하고, 이메일에 조치가 필요할 확률이 조치 불필요 threshold보다 낮아야 합니다. 송장 합계를 구매 주문서와 비교하는 일처럼 코드로 할 수 있는 검사는 코드에 두세요.</p>
+<p>이 예제는 질문을 던지고 그 답을 코드에서 사용하는 세 가지 <a href="../../patterns/#the-patterns">패턴</a>을 결합합니다. <a href="../../patterns/fan-out/">Speculative fan-out(추측성 팬아웃)</a>은 코드가 결국 쓰지 않게 될 질문까지 포함해 모든 질문을 요청 하나로 묻습니다. 목록의 마지막 질문은 <a href="../../patterns/companion-noul/">companion Noul(동반 Noul)</a> 질문으로, 이메일이 미결 송장을 하나도 지목하지 않는 경우를 코드에 알려 줍니다. <a href="../../patterns/probability-routing/">확률에 따른 routing</a>은 보관 처리처럼 되돌리기 어려운 조치에 더 엄격한 threshold를 적용합니다.</p>
+<p><a href="https://evals.typesafe.ai/invoice_processing">송장 지급 워크플로</a>는 송장을 지급해도 되는지에 대한 결정 전체에 같은 접근 방식을 적용합니다.</p>
+</blockquote>
+<p><strong>더 많은 아이디어</strong></p>
+<blockquote>
+<p>[accordion] 보험 청구 선별</p>
+<ul>
+<li>최초 사고 접수(FNOL) 보고서, 손해사정사 메모, 증빙 서류를 분류합니다.</li>
+<li>청구 건이 얼마나 복잡한지 판단하고, 누락된 정보와 잠재적인 사기 징후를 탐지합니다.</li>
+<li>청구 건의 우선순위를 정해 전문가 검토로 보내거나 무인 일괄 처리(STP)로 보냅니다. STP는 수작업 단계 없이 청구 건을 처음부터 끝까지 자동으로 처리하는 방식입니다.</li>
+<li>불확실하거나 위험도가 높은 건은 사람 손해사정사에게 넘깁니다.</li>
+</ul>
+<p>[accordion] 금융 범죄와 고객 확인(KYC) 검사</p>
+<ul>
+<li>결제 설명(이체의 참조 문구나 메모 등), KYC 문서, 과거 알림에 의심스러운 특징이 있는지 평가합니다.</li>
+<li>이름과 프로필이 일치하지 않는 레코드들 사이에서 같은 사람이나 회사를 찾아 연결합니다.</li>
+<li>위험도, 관련성, 증거의 품질에 따라 알림의 우선순위를 정합니다.</li>
+<li>모호한 건은 조사 담당자에게 보내 검토하게 합니다.</li>
+</ul>
+<p>[accordion] 위험 평가</p>
+<ul>
+<li>사고 보고서, 청구 메모, 거래 설명, 공급업체 평가를 각각 확률이 붙은 위험 지표로 바꿉니다.</li>
+<li>이 지표를 보험과 언더라이팅 워크플로에 활용합니다. 언더라이팅은 위험을 인수할지, 어떤 조건으로 인수할지 결정하는 일입니다.</li>
+<li>위험 유형을 분류하고 의심스러운 특징을 탐지합니다.</li>
+<li>심각도에 점수를 매기고 검토 우선순위를 정합니다.</li>
+<li>더 폭넓은 위험 모델에 쓸 feature(피처), 즉 모델이 학습하는 입력값을 추출합니다.</li>
+</ul>
+</blockquote>
+<h3 id="_5">실시간 앱<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>스마트 홈 비서, 주문, 프레젠테이션 도구, 실시간 채팅 모더레이션처럼 밀리초 단위로 답이 필요한 앱을 위한 사례입니다.</p>
+<table>
+<thead>
+<tr>
+<th>사용 사례</th>
+<th>Jev가 판단하는 것</th>
+<th>코드가 하는 일</th>
+<th>예제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>발표자가 말하는 대로 발표 노트에 체크 표시하기</strong></td>
+<td>아직 체크되지 않은 각 노트를 실시간 자막이 얼마나 잘 다루었는지</td>
+<td>점수가 threshold를 넘으면 노트에 체크 표시를 합니다</td>
+<td><a href="../../cookbooks/intelliprompter/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>카페 주문을 장바구니로 바꾸기</strong></td>
+<td>주문이 어떤 메뉴 항목을 말하는지, 각 항목의 필드가 무엇인지</td>
+<td>구조화된 장바구니를 만듭니다</td>
+<td><a href="../../cookbooks/cart_from_primitives/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>일상 언어로 된 요청으로 스마트 홈 제어하기</strong></td>
+<td>어떤 종류의 요청인지, 어느 구역과 기기, 동작을 대상으로 하는지</td>
+<td>명령을 실행하고, 질문과 대화는 LLM에 넘깁니다</td>
+<td><a href="../../demos/smart-home/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>Twitch 채팅 필터링하기</strong></td>
+<td>어떤 종류의 메시지인지(질문, 응원, 잡담, 요청하지 않은 게임 플레이 훈수, 스팸), 누군가를 모욕하는지, 게임을 스포일러하는지</td>
+<td>모욕, 스팸, 요청하지 않은 훈수는 숨기고, 스포일러는 흐리게 처리하고, 질문은 강조 표시합니다</td>
+<td><a href="../../cookbooks/twitch_chat_filter/">실행해 보기 →</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>더 많은 아이디어</strong></p>
+<blockquote>
+<p>[accordion] 음성 에이전트</p>
+<ul>
+<li>음성 인식 모델의 발화 종료 신호와 함께, 화자가 자기 차례의 말을 마쳤는지 판단합니다.</li>
+<li>고객 서비스 통화를 분배합니다. 의사 결정 트리 안의 판단은 Jev가 내리고, 고정된 규칙을 적용해 최종 경로를 고르는 일은 코드가 합니다.</li>
+<li>날씨 문의처럼 단순한 의도는 빠르게 처리합니다.</li>
+<li>여러 자막 조각에 나뉘어 들어오는 계좌 번호 같은 민감한 값을 잡아내고, 민감하지 않은 값은 가리지 않습니다.</li>
+</ul>
+</blockquote>
+<h3 id="_6">대규모 검색과 레이블링<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>긴 문서를 검색하거나, 상품 카탈로그를 정리하거나, 데이터셋을 병합하거나, 텍스트로 예측 모델을 만드는 팀을 위한 사례입니다.</p>
+<table>
+<thead>
+<tr>
+<th>사용 사례</th>
+<th>Jev가 판단하는 것</th>
+<th>코드가 하는 일</th>
+<th>예제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>긴 문서를 한 줄씩 검색하기</strong></td>
+<td>일상 언어로 된 질의에 어느 줄이 답하는지, 문서가 그 질의에 답하기는 하는지</td>
+<td>줄에 순위를 매기고, 문서를 답함, 일부 답함, 답하지 않음으로 레이블링합니다</td>
+<td><a href="../../cookbooks/semantic_find/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>법률 검색 결과 re-ranking(재순위화)하기</strong></td>
+<td>키워드 검색으로 추린 각 후보가 법원 판결문이 인용하는 선례일 수 있는지</td>
+<td>가능성이 가장 높은 후보를 맨 앞에 둡니다</td>
+<td><a href="../../cookbooks/rerank_typesafe/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>어렴풋이 기억나는 영화를 5,000편 중에서 찾기</strong></td>
+<td>각 영화가 사용자의 설명과 일치하는지. 처음에는 짧은 줄거리로, 그다음 상위 80편은 긴 줄거리로 판단하고, 마지막으로 상위 20편 중 어느 것인지</td>
+<td>최고 확률이 높으면 영화 한 편을 보여 주고, 그렇지 않으면 짧은 후보 목록을 보여 줍니다</td>
+<td><a href="../../cookbooks/infinite_cardinality_choice/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>Google Sheets 수식으로 Airbnb 숙소 검색하기</strong></td>
+<td>100개씩 묶은 각 그룹에서 어느 숙소가 일상 영어로 쓴 요청에 가장 잘 맞는지, 그다음 추려 낸 각 숙소가 요청에 얼마나 잘 맞는지</td>
+<td>각 그룹에서 상위 5개를 남기고, 각 점수를 10점 만점 점수로 바꾸고, 가장 좋은 10개를 반환합니다</td>
+<td><a href="../../demos/airbnb-listing-search/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>특허, 상품, 의학 주제의 계층적 분류</strong></td>
+<td>카테고리 트리의 각 단계에서 어느 카테고리가 항목에 맞는지</td>
+<td>가능성이 가장 높은 가지를 따라 가장 구체적인 카테고리까지 내려갑니다</td>
+<td><a href="../../cookbooks/hierarchical_classification/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>지식 그래프 간 엔터티 정렬하기</strong></td>
+<td>두 레코드가 같은 항목을 가리키는지, 밀접하게 관련된 항목인지, 서로 다른 항목인지, 그리고 제목, 아티스트, 레이블이 일치하는지</td>
+<td>분명히 일치하면 병합을 권하고, 중간에 걸친 쌍은 큐레이터에게 보내고, 나머지는 연결하지 않은 채로 둡니다</td>
+<td><a href="../../cookbooks/entity_alignment/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>예측 모델에 쓸 feature 발굴하기</strong></td>
+<td>LLM이 제안한, 각 레코드에 대한 질문</td>
+<td>답을 모델의 숫자형 입력 열로 바꾸고, 질문의 문구를 바꾸거나 질문을 빼는 변경은 모델의 오차가 줄어들 때만 받아들입니다</td>
+<td><a href="../../cookbooks/autoresearch_feature_discovery/">실행해 보기 →</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>더 많은 아이디어</strong></p>
+<blockquote>
+<p>[accordion] 레코드 안의 관계와 모순</p>
+<ul>
+<li>관계와 엔터티 유형을 분류합니다.</li>
+<li>레코드 사이 또는 주장 사이의 모순을 탐지합니다.</li>
+</ul>
+<p>[accordion] 수요 예측</p>
+<ul>
+<li>고객 문의, 영업 메모, 상품 리뷰, 지원 티켓, 시장 보고서에서 얻은 feature를 예측 모델에 추가합니다.</li>
+<li>구매 의도, 긴급도, 상품에 대한 관심을 추출합니다.</li>
+<li>공급 우려, 경쟁 압력, 새로운 유형의 수요를 탐지합니다.</li>
+<li>이 feature를 과거 시계열 데이터와 함께 예측 모델에 넣습니다.</li>
+</ul>
+</blockquote>
+<h3 id="_7">에이전트와 검증<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>운영 환경의 에이전트나 LLM 기능에 검사, routing, 검토가 필요한 팀을 위한 사례입니다.</p>
+<table>
+<thead>
+<tr>
+<th>사용 사례</th>
+<th>Jev가 판단하는 것</th>
+<th>코드가 하는 일</th>
+<th>예제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LLM 입력과 출력을 위한 guardrail(가드레일)</strong></td>
+<td>메시지가 앱의 instructions(지시문)를 무시하게 만들려고 하는지, 해를 끼치는 데 도움을 달라고 하거나 의료 조언을 구하는지, 자해를 암시하는지, 답변했을 때 얼마나 큰 해가 생길지</td>
+<td>여러분이 정한 threshold에 따라 각 메시지를 통과시키거나, 검토로 보내거나, 차단하거나, 위기 지원 경로로 보냅니다</td>
+<td><a href="../../cookbooks/llm_guardrails/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>인용 재확인하기</strong></td>
+<td>인용문이 나온 절이 주장을 뒷받침하는지, 주장과 모순되는지, 주장에 대해 아무 말도 하지 않는지</td>
+<td>출처에 없는 인용문은 조작된 것으로 표시하고, 나머지는 검증됨, 모순됨, 근거 없음으로 레이블링하고, confidence가 낮은 레이블은 사람에게 보냅니다</td>
+<td><a href="../../cookbooks/citation_check/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>LLM의 답변을 제공된 문단과 대조해 확인하기</strong></td>
+<td>질문에 필요한 모든 사실이 문단에 나와 있는지, 답변이 답을 거절하는지, 문단을 단계별로 따라가면 그 답변에 이르는지</td>
+<td>세 확률을 위험도로 바꾸고, threshold를 넘는 답변은 검토로 보냅니다</td>
+<td><a href="../../cookbooks/verify_llm_outputs/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>완료된 에이전트 실행 검토하기</strong></td>
+<td>에이전트가 되돌릴 수 없는 조치를 할 권한이 있었는지, 작업이 완료되었는지, 사용자가 얼마나 만족한 것으로 보였는지</td>
+<td>허용되지 않은 조치는 당직자에게 알리고, 문제가 없는 실행은 종료하고, 실패한 실행은 이슈로 등록합니다</td>
+<td><a href="https://evals.typesafe.ai/agent_trace_observability">워크플로 보기 ↗</a></td>
+</tr>
+<tr>
+<td><strong>RAG 문단 분류하기</strong></td>
+<td>검색된 각 문단이 질문과 관련이 있는지, 답을 담고 있는지, 질문이 전제하는 내용과 모순되는지, 모델에 지시를 내리려 하는지</td>
+<td>관련 없는 문단과 지시가 주입된 문단은 버리고, 나머지를 답변 모델에 전달하되 모순되는 문단은 상충한다고 표시합니다</td>
+<td><a href="../../cookbooks/classifying_rag_passages/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>모델 캐스케이드: 저렴한 모델 먼저, 실패하면 상위 모델로</strong></td>
+<td>저렴한 모델이 원본에서 뽑아낸 각 필드가 틀렸는지. 예를 들어 값이 필드 이름과 맞지 않거나, 타입이 틀리거나, 원본에 정보가 있는데도 값이 비어 있는 경우</td>
+<td>저렴한 모델의 답을 받아들이고, 검사에 실패했을 때만 비용을 들여 추론 모델을 씁니다</td>
+<td><a href="../../cookbooks/sde_cascade/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>에이전트에 스킬 추천하기</strong></td>
+<td>요청에 스킬이 필요하기는 한지, 194개 스킬 중 어느 것이 맞는지, 그다음 상위 3개 중 어느 것이 가장 잘 맞는지, 각 스킬이 요청받은 일을 해내는지</td>
+<td>상위 3개에 대해 전체 설명을 붙여 다시 묻고, 스킬을 많아야 하나만 추천하며, 확률이 threshold에 못 미치면 아무것도 추천하지 않습니다</td>
+<td><a href="../../cookbooks/skill_suggestion/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>지원 어시스턴트의 다음 조치 고르기</strong></td>
+<td>고객이 무엇을 원하는지, 얼마나 불만스러워하는지, 본인이 모르는 결제를 신고하는지 또는 사람 상담원을 요청하는지</td>
+<td>안전 규칙을 먼저 적용한 다음, 사람에게 넘기거나, 환불하거나, 카드를 정지하거나, 고객에게 더 분명히 설명해 달라고 요청합니다</td>
+<td><a href="https://evals.typesafe.ai/customer_service">워크플로 보기 ↗</a></td>
+</tr>
+<tr>
+<td><strong>어시스턴트에 간단한 메모리 부여하기</strong></td>
+<td>요청이 고객의 요금제나 제품 에디션처럼 고객에 대해 오래 유지되는 사실을 말하는지</td>
+<td>해당 요청을 Jev의 답과 함께 저장하고, 그 고객이 나중에 Jev에 보내는 요청에 덧붙입니다</td>
+<td><a href="../../cookbooks/basic_memory/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>일상 언어로 된 요청에서 function calling(함수 호출)하기</strong></td>
+<td>요청에 어떤 함수가 필요한지, 그리고 정해진 값 목록으로 제한된 각 인자가 어떤 값을 갖는지</td>
+<td>코드에서 해당하는 함수를 그 값들로 호출하고, 요청에서 언급하지 않은 인자는 생략합니다</td>
+<td><a href="../../cookbooks/function_calling/">실행해 보기 →</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>더 많은 아이디어</strong></p>
+<blockquote>
+<p>[accordion] 도구 호출과 데이터 유출 검사</p>
+<ul>
+<li>에이전트가 하는 모든 도구 호출의 의미를 LLM 호출 비용의 일부만으로 확인합니다.</li>
+<li>LLM 출력에서 민감한 데이터가 유출되는 것을 잡아냅니다.</li>
+<li>도구 호출 오류와 품질이 낮은 응답을 발생하는 즉시 탐지합니다.</li>
+<li>각 검사의 결과와 확률을 기록해, AI 시스템이나 그 하니스(모델과 도구를 실행하는 코드)에서 생긴 실패를 더 쉽게 추적할 수 있게 합니다.</li>
+</ul>
+<p>[accordion] LLM 답변 점수 매기기</p>
+<ul>
+<li>각 LLM 답변을 여러분이 중요하게 보는 품질 항목으로 채점합니다. 예를 들어 질문에 답하는지, 주제를 벗어나지 않는지, 스타일 가이드를 따르는지 등입니다.</li>
+<li>같은 입력에 대한 두 모델 또는 두 prompt(프롬프트)의 답변을 비교하고 어느 쪽이 더 나은지 기록합니다.</li>
+<li>운영 환경의 모든 답변에 검사를 실행하고 점수를 시간에 따라 추적합니다.</li>
+<li>점수가 낮거나 Jev가 확신하지 못하는 답변은 사람에게 보내 검토하게 합니다.</li>
+</ul>
+<p>[accordion] 모델 라우터: prompt마다 알맞은 모델 연결하기</p>
+<ul>
+<li>Jev를 사용해 각 prompt를 어느 LLM이 받을지 고르는 맞춤 라우터를 만듭니다.</li>
+<li>여러분의 워크플로에 맞는 routing 규칙과 threshold를 정합니다.</li>
+<li>각 prompt의 의도와 주제 영역을 분류합니다.</li>
+<li>난이도와 위험도를 추정합니다.</li>
+</ul>
+<p>[accordion] 의미 기반 코드 린팅</p>
+<ul>
+<li>Jev를 사용해 코드와 글의 의미를 검사하는 자동 린트 검사를 추가합니다.</li>
+<li>팀의 코딩 컨벤션과 글쓰기 지침에 맞는 검사를 정의합니다.</li>
+<li>이 검사를 CI에서 실행하고 위반 사항을 검토 대상으로 표시합니다.</li>
+</ul>
+</blockquote>
+<h3 id="_8">이미지와 비디오<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>스캔 문서, 사진, 비디오 프레임을 눈으로 직접 읽는 팀을 위한 사례입니다.</p>
+<table>
+<thead>
+<tr>
+<th>사용 사례</th>
+<th>Jev가 판단하는 것</th>
+<th>코드가 하는 일</th>
+<th>예제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>스캔한 예방 접종 기록 읽기</strong></td>
+<td>각 백신이 스캔본에 있는지와 그 위치, 각 접종이 이루어진 연도(또는 읽을 수 없다는 사실), 각 접종이 출발일에도 여전히 효력이 있는지</td>
+<td>각 접종이 여행 얼마 전에 이루어졌는지 계산하고, 의심스러운 판독 결과와 기한이 지난 접종을 간호사가 확인하도록 표시하고, 표시된 행을 잘라 냅니다</td>
+<td><a href="../../cookbooks/reading_scanned_documents/">실행해 보기 →</a></td>
+</tr>
+<tr>
+<td><strong>모이통 카메라로 새의 방문 기록하기</strong></td>
+<td>프레임에 새가 있는지, 어디에 있는지, 어떤 종인지</td>
+<td>답을 종별 방문 기록으로 바꿉니다</td>
+<td><a href="../../cookbooks/feeder_watch/">실행해 보기 →</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">그 밖의 산업<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>위 카테고리에 속하지 않는 산업을 위한 아이디어입니다.</p>
+<blockquote>
+<p>[accordion] 콘텐츠 모더레이션</p>
+<ul>
+<li>회사 고유의 섬세한 criteria(판단 기준)를 적용해 어떤 게시물이 모더레이션 기준을 충족하는지 판단합니다.</li>
+<li>커뮤니티, 고객 지원, SDR(영업 개발 담당자)의 아웃리치 전반에서 사용자 콘텐츠와 자동화된 대화를 모더레이션합니다.</li>
+<li>사기, 안전하지 않은 조언, 개인 정보 노출, 수신 거부 요청, 정책을 위반하는 주장을 탐지합니다.</li>
+<li>심각도와 확률 또는 confidence를 결합해 콘텐츠를 허용, 경고, 검토, 차단합니다.</li>
+</ul>
+<p>[accordion] 게임</p>
+<ul>
+<li>플레이어 신고, 게임 내 채팅, 리뷰, 지원 대화를 평가합니다.</li>
+<li>플레이어 신고와 채팅에서 의심스러운 행동을 탐지합니다.</li>
+<li>콘텐츠에 주석을 달고 불만이나 몰입도에 점수를 매깁니다.</li>
+<li>이탈(플레이를 곧 그만둘 플레이어) 징후를 탐지하고 플레이어 지원 요청을 알맞은 곳으로 보냅니다.</li>
+</ul>
+<p>[accordion] 고객 지원</p>
+<ul>
+<li>들어오는 티켓을 문제 유형, 제품 영역, 고객 의도별로 분류합니다.</li>
+<li>통화 녹취록을 처리해 고객의 문제, 약속한 사항, 후속 조치를 추출합니다.</li>
+<li>긴급도와 이탈 위험을 탐지합니다.</li>
+<li>각 건을 알맞은 팀, 대기열, 자동화 워크플로로 보냅니다.</li>
+<li>지원 응답을 정책과 고객의 요청에 비추어 검증합니다.</li>
+</ul>
+<p>[accordion] 법무와 컴플라이언스</p>
+<ul>
+<li>계약서, 정책, 규제 관련 제출 서류, 마케팅 문구를 분류합니다.</li>
+<li>누락된 조항, 금지된 주장, 정책 위반을 탐지합니다.</li>
+<li>문서를 명시적인 법률 또는 컴플라이언스 요건에 비추어 검증합니다.</li>
+<li>위험도가 높거나 불확실한 발견 사항은 법률 자문이나 컴플라이언스 팀에 넘깁니다.</li>
+</ul>
+<p>[accordion] 채용</p>
+<ul>
+<li>이력서, 지원서, 면접 피드백을 직무와 관련된 명시적인 기준에 비추어 평가합니다.</li>
+<li>관련 경력을 식별합니다.</li>
+<li>필수 역량에 대한 근거에 점수를 매깁니다.</li>
+<li>지원자를 직무에 매칭합니다.</li>
+<li>지원자를 채용 관리자나 리크루터에게 전달합니다.</li>
+<li>불확실한 건은 사람 검토로 넘깁니다.</li>
+</ul>
+<p>[accordion] 리드 발굴</p>
+<ul>
+<li>회사 프로필, 임원 약력, 인바운드 메시지를 이상적인 고객 프로필과 매칭합니다.</li>
+<li>산업 적합도와 회사 성숙도에 점수를 매깁니다.</li>
+<li>구매자 관련성, 고충, 구매 의도를 탐지합니다.</li>
+<li>리드의 우선순위를 정하고 알맞은 담당자에게 보냅니다.</li>
+</ul>
+<p>[accordion] 이커머스 마켓플레이스</p>
+<ul>
+<li>서로 형식이 맞지 않는 판매자 카탈로그의 상품 목록을 분류하고 하나의 표준 형식으로 변환합니다.</li>
+<li>제목과 설명에서 상품 속성을 추출합니다.</li>
+<li>금지된 상품, 위조품 신호, 리뷰 조작, 정책 위반을 탐지합니다.</li>
+<li>상품에 순위를 매기고 불확실한 상품 목록은 사람 검토로 보냅니다.</li>
+</ul>
+<p>[accordion] 광고</p>
+<ul>
+<li>광고 이미지와 비디오, 캠페인 문구, 랜딩 페이지, 광고 옆에 노출되는 콘텐츠를 평가합니다.</li>
+<li>브랜드 안전성(주변 콘텐츠가 광고주의 브랜드에 해를 끼칠 수 있는지)과 광고가 대상 고객에게 적합한지를 분류합니다.</li>
+<li>규제 준수 여부와 금지된 주장을 확인합니다.</li>
+<li>광고의 품질과 광고가 랜딩 페이지와 일치하는지를 평가합니다.</li>
+</ul>
+<p>[accordion] 과학적 발견</p>
+<ul>
+<li>체계적 문헌 고찰을 위해 논문을 포함 기준과 제외 기준에 따라 선별합니다.</li>
+<li>인터뷰 녹취록, 주관식 설문 응답, 현장 노트의 구절에 미리 정의한 주제나 카테고리로 레이블을 붙입니다.</li>
+<li>대조군, 데이터셋 설명, 실험 설정처럼 누락된 방법론 세부 사항을 표시합니다.</li>
+<li>여러 논문에 걸친 엔터티와 관계를 식별해 연구 지식 그래프를 만들고, 연구 결과를 이를 뒷받침하는 구절과 연결합니다.</li>
+</ul>
+</blockquote>
+<h2 id="jev">코드 워크플로에 Jev가 필요하다는 신호<a class="headerlink" href="#jev" title="Permanent link">&para;</a></h2>
+<ul>
+<li>LLM에 JSON을 반환하라고 요청한 다음 이를 파싱하고, 검증하고, retry(재시도)합니다. Jev는 각 질문에 타입이 지정된 <a href="../../primitives/">primitive(프리미티브: 기본 구성 요소)</a>와 그 확률로 답하므로 파싱할 텍스트가 없습니다.</li>
+<li>데이터가 너무 많아서 프런티어 LLM에 모두 넣기에는 비용이 현실적이지 않습니다. <a href="https://evals.typesafe.ai/customer_service">고객 서비스 평가</a>에서 Jev 워크플로는 프런티어 모델보다 비용이 훨씬 적게 듭니다.</li>
+<li>LLM 워크플로가 같은 입력에 다른 답을 냅니다. 좁은 질문을 하면 어떤 답이 불확실한지 확률이 코드에 알려 줍니다. <a href="../../cookbooks/consistency_choice_cookbook/">Self-consistency: choices</a>와 <a href="../../cookbooks/consistency_noul_cookbook/">Self-consistency: nouls</a>는 답이 얼마나 자주 바뀌는지 측정하는 방법을 보여 줍니다. <a href="https://evals.typesafe.ai/">네 가지 평가</a> 전체에서 모든 모델은 같은 규칙을 prompt 하나에 넣었을 때보다 구조화된 워크플로로 구성했을 때 더 정확했습니다.</li>
+<li>LLM 워크플로가 너무 느립니다. <a href="https://evals.typesafe.ai/security_incidents">보안 사고 평가</a>에서 Jev 워크플로는 건당 0.3초가 걸리는 반면, 프런티어 모델은 3.4초에서 66초가 걸립니다.</li>
+<li>팀의 누군가가 항목을 하나하나 읽고 어떻게 처리할지 결정하며, 그 결정이 잘 아는 사람이라면 한눈에 알아챌 세부 사항에 달려 있습니다.</li>
+<li>실수의 대가가 커서 불확실한 건은 사람에게 전달되어야 합니다.</li>
+</ul>
+<h2 id="_10">나만의 워크플로 설계하기<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>시스템이 취하는 조치에서 출발해, 그 조치가 의존하는 판단을 나열하세요. 각 판단을 Jev에 던질 질문으로 바꾸세요. 답을 조합해 결정을 내리는 규칙은 코드에 두세요. <a href="../../patterns/#patterns-by-goal">목표별 패턴</a>은 각 패턴의 용도를 보여 주고, <a href="../how-to-build-with-system-one/">TypeSafe로 구축하는 방법</a>은 질문과 규칙을 설계하는 방법을 다룹니다. 코딩 에이전트로 개발한다면 <a href="../../agent-skill/">TypeSafe 에이전트 스킬</a>을 설치해 코드 작성에 도움을 받으세요.</p>
+<blockquote>
+<p>[accordion] 결정의 형태</p>
+<table>
+<thead>
+<tr>
+<th>결정의 형태</th>
+<th>이럴 때 사용</th>
+<th>흔한 용도</th>
+<th>예제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>분류</td>
+<td>답이 정해진 목록의 카테고리 중 하나일 때</td>
+<td>의도, 주제, 부서, 위험 유형, 엔터티 유형</td>
+<td><a href="../../cookbooks/classification_using_confidence/">confidence를 활용한 분류</a></td>
+</tr>
+<tr>
+<td>탐지</td>
+<td>어떤 속성 하나가 존재할 확률이 필요할 때</td>
+<td>스팸, 사기, 긴급도, jailbreak, 민감한 데이터</td>
+<td><a href="../../cookbooks/llm_guardrails/">LLM을 위한 guardrail</a></td>
+</tr>
+<tr>
+<td>점수화</td>
+<td>답이 낮음에서 높음처럼 순서가 있는 척도 위의 한 지점일 때</td>
+<td>심각도, 관련성, 품질, 불만, 적합성</td>
+<td><a href="../../patterns/composite-scoring/">Composite scoring</a></td>
+</tr>
+<tr>
+<td>Routing</td>
+<td>카테고리가 다음 코드 경로를 정할 때</td>
+<td>도구 사용, 상위 단계로 넘기기, 모델 routing, 지원 대기열</td>
+<td><a href="../../cookbooks/function_calling/">Function calling</a></td>
+</tr>
+<tr>
+<td>검색</td>
+<td>자연어 질의에 맞는 항목을 찾아야 할 때</td>
+<td>시맨틱 검색, 문서 발굴, 후보 생성</td>
+<td><a href="../../cookbooks/semantic_find/">한 줄씩 검색하기</a></td>
+</tr>
+<tr>
+<td>조회</td>
+<td>워크플로에 가장 관련성 높은 컨텍스트나 레코드가 필요할 때</td>
+<td>RAG 컨텍스트, 증거 조회, 지식 조회</td>
+<td><a href="../../cookbooks/classifying_rag_passages/">RAG 문단 분류하기</a></td>
+</tr>
+<tr>
+<td>순위화</td>
+<td>항목을 의미상 관련성이나 품질 순으로 정렬해야 할 때</td>
+<td>검색 결과, 추천, 후보 우선순위 지정</td>
+<td><a href="../../cookbooks/rerank_typesafe/">Re-ranking</a></td>
+</tr>
+<tr>
+<td>검증</td>
+<td>LLM 답변이나 도구 호출 같은 출력에 특정 종류의 오류가 있는지 확인해야 할 때</td>
+<td>인용 근거, 정책 위반, 도구 호출 오류, 응답 품질</td>
+<td><a href="../../cookbooks/citation_check/">인용 재확인하기</a></td>
+</tr>
+<tr>
+<td>ML feature 추출</td>
+<td>전통적인 ML 모델에 텍스트의 의미에서 뽑아낸 feature가 필요할 때</td>
+<td>구매 의도, 상품에 대한 관심, 경쟁 압력, 이탈 신호</td>
+<td><a href="../../cookbooks/autoresearch_feature_discovery/">Autoresearch feature 발굴</a></td>
+</tr>
+<tr>
+<td>구조화 데이터 추출</td>
+<td>정해진 형식이 없는 입력에서 알려진 필드를 뽑아내야 할 때</td>
+<td>지원자 속성, 주문 필드, 문서 레이블</td>
+<td><a href="../../cookbooks/pre_parsed_value_extraction_cookbook/">미리 파싱된 값 추출</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>이 문서는 개발자 문서 플랫폼인 <a href="https://mintlify.com">Mintlify</a>로 제작하고 호스팅합니다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../../introduction/machine-learning-primer/" class="md-footer__link md-footer__link--prev" aria-label="이전: AI 입문">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                AI 입문
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../system-one/" class="md-footer__link md-footer__link--next" aria-label="다음: System One">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                System One
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      비공식 한국어 번역본입니다. 원문과 저작권은 TypeSafe에 있습니다: <a href="https://docs.typesafe.ai">docs.typesafe.ai</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
