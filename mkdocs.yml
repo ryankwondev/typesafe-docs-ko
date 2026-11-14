@@ -1,0 +1,196 @@
+site_name: TypeSafe 문서 (비공식 한국어 번역)
+site_url: https://ryankwondev.github.io/typesafe-docs-ko/
+site_description: TypeSafe System One API 문서의 비공식 한국어 번역
+copyright: '비공식 한국어 번역본입니다. 원문과 저작권은 TypeSafe에 있습니다: <a href="https://docs.typesafe.ai">docs.typesafe.ai</a>'
+docs_dir: docs
+theme:
+  name: material
+  language: ko
+  custom_dir: overrides
+  features: [navigation.sections, navigation.indexes, navigation.top, navigation.footer, content.code.copy, search.highlight, toc.follow]
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle: {icon: material/weather-night, name: 다크 모드}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle: {icon: material/weather-sunny, name: 라이트 모드}
+markdown_extensions:
+  - tables
+  - attr_list
+  - md_in_html
+  - sane_lists
+  - toc: {permalink: true}
+  - pymdownx.highlight: {anchor_linenums: false}
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+validation: {links: {anchors: ignore}}
+nav:
+  - "시작하기":
+    - "index.md"
+    - "introduction/quickstart.md"
+    - "introduction/coding-agents.md"
+    - "introduction/machine-learning-primer.md"
+  - "개념":
+    - "concepts/use-case-map.md"
+    - "concepts/system-one.md"
+    - "concepts/state.md"
+    - "concepts/how-to-build-with-system-one.md"
+  - "Primitives":
+    - "primitives.md"
+    - "primitives/choice.md"
+    - "primitives/score.md"
+    - "primitives/noul.md"
+    - "primitives/box.md"
+    - "primitives/advanced.md"
+  - "images.md"
+  - "confidence.md"
+  - "패턴":
+    - "patterns.md"
+    - "patterns/fan-out.md"
+    - "patterns/noul-screen.md"
+    - "patterns/companion-noul.md"
+    - "patterns/confidence-routing.md"
+    - "patterns/probability-routing.md"
+    - "patterns/composite-scoring.md"
+  - "Cookbooks":
+    - "cookbooks.md"
+    - "cookbooks/function_calling.md"
+    - "cookbooks/skill_suggestion.md"
+    - "cookbooks/llm_guardrails.md"
+    - "cookbooks/citation_check.md"
+    - "cookbooks/verify_llm_outputs.md"
+    - "cookbooks/classifying_rag_passages.md"
+    - "cookbooks/basic_memory.md"
+    - "cookbooks/hierarchical_classification.md"
+    - "cookbooks/classification_using_confidence.md"
+    - "cookbooks/twitch_chat_filter.md"
+    - "cookbooks/sde_cascade.md"
+    - "cookbooks/date_extraction_cookbook.md"
+    - "cookbooks/pre_parsed_value_extraction_cookbook.md"
+    - "cookbooks/autoformat.md"
+    - "cookbooks/cart_from_primitives.md"
+    - "cookbooks/reading_scanned_documents.md"
+    - "cookbooks/ocr_confidence_bounding_boxes.md"
+    - "cookbooks/feeder_watch.md"
+    - "cookbooks/rerank_typesafe.md"
+    - "cookbooks/infinite_cardinality_choice.md"
+    - "cookbooks/semantic_find.md"
+    - "cookbooks/entity_alignment.md"
+    - "cookbooks/intelliprompter.md"
+    - "cookbooks/consistency_choice_cookbook.md"
+    - "cookbooks/consistency_noul_cookbook.md"
+    - "cookbooks/parallel_questions.md"
+    - "cookbooks/autoresearch_feature_discovery.md"
+  - "데모":
+    - "demos.md"
+    - "demos/airbnb-listing-search.md"
+    - "demos/smart-home.md"
+    - "demos/content-audit.md"
+  - "models.md"
+  - "agent-skill.md"
+  - "legal.md"
+  - "model-jaggedness.md"
+  - "changelog.md"
+  - "API":
+    - "api/system-one.md"
+    - "api/list-models.md"
+    - "api/errors.md"
+  - "SDK":
+    - "sdk.md"
+    - "Python":
+      - "sdk/python.md"
+      - "사용법":
+        - "sdk/python/usage/basic.md"
+        - "sdk/python/usage/advanced.md"
+      - "sdk/python/changelog.md"
+      - "API":
+        - "sdk/python/api.md"
+        - "Clients":
+          - "sdk/python/api/clients/async.md"
+          - "sdk/python/api/clients/sync.md"
+        - "Types":
+          - "sdk/python/api/types/questions.md"
+          - "sdk/python/api/types/assets.md"
+          - "sdk/python/api/types/responses.md"
+          - "sdk/python/api/types/common.md"
+        - "sdk/python/api/retries.md"
+        - "sdk/python/api/exceptions.md"
+        - "sdk/python/api/constants.md"
+    - "JavaScript":
+      - "sdk/javascript.md"
+      - "sdk/javascript/changelog.md"
+      - "API":
+        - "sdk/javascript/api.md"
+        - "Classes":
+          - "sdk/javascript/api/classes/APIConnectionError.md"
+          - "sdk/javascript/api/classes/APIError.md"
+          - "sdk/javascript/api/classes/APIPromise.md"
+          - "sdk/javascript/api/classes/APITimeoutError.md"
+          - "sdk/javascript/api/classes/APIUserAbortError.md"
+          - "sdk/javascript/api/classes/AuthenticationError.md"
+          - "sdk/javascript/api/classes/BadRequestError.md"
+          - "sdk/javascript/api/classes/Image.md"
+          - "sdk/javascript/api/classes/InternalServerError.md"
+          - "sdk/javascript/api/classes/NotFoundError.md"
+          - "sdk/javascript/api/classes/PermissionDeniedError.md"
+          - "sdk/javascript/api/classes/RateLimitError.md"
+          - "sdk/javascript/api/classes/TypeSafeClient.md"
+          - "sdk/javascript/api/classes/TypeSafeError.md"
+          - "sdk/javascript/api/classes/UnprocessableEntityError.md"
+        - "Interfaces":
+          - "sdk/javascript/api/interfaces/BoxCoordinates.md"
+          - "sdk/javascript/api/interfaces/BoxQuestion.md"
+          - "sdk/javascript/api/interfaces/BoxResponse.md"
+          - "sdk/javascript/api/interfaces/ChoiceQuestion.md"
+          - "sdk/javascript/api/interfaces/ChoiceResponse.md"
+          - "sdk/javascript/api/interfaces/Logger.md"
+          - "sdk/javascript/api/interfaces/ModelCard.md"
+          - "sdk/javascript/api/interfaces/Models.md"
+          - "sdk/javascript/api/interfaces/NoulQuestion.md"
+          - "sdk/javascript/api/interfaces/NoulResponse.md"
+          - "sdk/javascript/api/interfaces/Questions.md"
+          - "sdk/javascript/api/interfaces/RequestOptions.md"
+          - "sdk/javascript/api/interfaces/RetryPolicy.md"
+          - "sdk/javascript/api/interfaces/ScoreQuestion.md"
+          - "sdk/javascript/api/interfaces/ScoreResponse.md"
+          - "sdk/javascript/api/interfaces/SystemOneRequest.md"
+          - "sdk/javascript/api/interfaces/SystemOneResult.md"
+          - "sdk/javascript/api/interfaces/TextWithAssets.md"
+          - "sdk/javascript/api/interfaces/TypeSafeClientConfig.md"
+          - "sdk/javascript/api/interfaces/Usage.md"
+          - "sdk/javascript/api/interfaces/WithResponse.md"
+        - "Type Aliases":
+          - "sdk/javascript/api/type-aliases/Asset.md"
+          - "sdk/javascript/api/type-aliases/ChoiceCriteria.md"
+          - "sdk/javascript/api/type-aliases/Compression.md"
+          - "sdk/javascript/api/type-aliases/ContentValue.md"
+          - "sdk/javascript/api/type-aliases/Description.md"
+          - "sdk/javascript/api/type-aliases/EntryType.md"
+          - "sdk/javascript/api/type-aliases/EnvVar.md"
+          - "sdk/javascript/api/type-aliases/Fetch.md"
+          - "sdk/javascript/api/type-aliases/JsonValue.md"
+          - "sdk/javascript/api/type-aliases/LogLevel.md"
+          - "sdk/javascript/api/type-aliases/Question.md"
+          - "sdk/javascript/api/type-aliases/ResultFor.md"
+          - "sdk/javascript/api/type-aliases/ScoreCriteria.md"
+          - "sdk/javascript/api/type-aliases/ScoreLegend.md"
+          - "sdk/javascript/api/type-aliases/ScoreOf.md"
+          - "sdk/javascript/api/type-aliases/SentContent.md"
+        - "Variables":
+          - "sdk/javascript/api/variables/ENV.md"
+          - "sdk/javascript/api/variables/LOG_LEVELS.md"
+          - "sdk/javascript/api/variables/noul.md"
+          - "sdk/javascript/api/variables/score.md"
+          - "sdk/javascript/api/variables/VERSION.md"
+          - "sdk/javascript/api/variables/withAssets.md"
+        - "Functions":
+          - "sdk/javascript/api/functions/box.md"
+          - "sdk/javascript/api/functions/choice.md"
+          - "sdk/javascript/api/functions/image.md"
